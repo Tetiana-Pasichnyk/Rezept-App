@@ -1,12 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./MealCard.css";
 
 function MealCard({ meal, isFavorite, toggleFavorite }) {
+    const navigate = useNavigate();
+
     return (
         <div className="meal-card shadow-sm position-relative">
             <img src={meal.thumbnail} alt={meal.name} className="meal-img" />
 
-            {/* Сердечко */}
             <button
                 onClick={() => toggleFavorite(meal.id)}
                 style={{
@@ -31,7 +33,9 @@ function MealCard({ meal, isFavorite, toggleFavorite }) {
                     </div>
                 </div>
 
-                <button className="detail-btn">Detail</button>
+                <button className="detail-btn" onClick={() => navigate(`/meal/${meal.id}`)}>
+                    Detail
+                </button>
             </div>
         </div>
     );
