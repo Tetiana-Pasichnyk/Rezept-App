@@ -1,0 +1,55 @@
+.border-color {
+  border-top-color: #d2691e !important;
+}
+
+.nav-buttons {
+  margin-left: 40px;
+}
+
+.nav-buttons > button {
+  border: none;
+ flex: 0 0 calc(50% / 7); /*  50% von block */
+  height: 30px;
+  margin-top: 8px;
+}
+
+.custom-arrow i {
+  color: #0e0d0d;
+  font-size: 1.5rem;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  background: none !important;
+  width: 30px;
+  height: 20px;
+  top: 60%;
+  transform: translateY(-50%);
+}
+
+
+
+@media (max-width: 768px) {
+  .nav-buttons > button {
+    flex: 0 0 calc(100% / 3); /* 小屏显示3个 */
+   
+  }
+  .nav-bar {
+  
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .search-bar {
+    max-width: 70%;
+  }
+ 
+  .nav-right >button {
+    min-width: 70px;
+     justify-content: flex-end;
+
+  }
+
+
+}
+
+
