@@ -26,7 +26,9 @@ function NavBar() {
     const handleCategoryClick = (category) => {
         navigate(`/?category=${category}`);
     };
-
+    const goToAddMeal = () => {
+        navigate("/add-meal");
+    };
     return (
         <>
             <Navbar expand="lg" bg="light" className="px-3 shadow-sm">
@@ -51,7 +53,7 @@ function NavBar() {
                     <Navbar.Collapse id="main-nav" className="justify-content-center">
                         <Nav className="text-center">
                             <Nav.Link href="/">Home</Nav.Link>
-                            <Nav.Link href="#">Neues Rezept</Nav.Link>
+                            <Nav.Link onClick={goToAddMeal}>Neues Rezept</Nav.Link>
                             <Nav.Link href="#">Log-in</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
