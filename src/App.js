@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import MealPage from "./pages/MealPages/MealPage";
 import NavBar from "./components/Nav/NavBar";
-// <-- импортируем Navbar
 import "@fontsource/happy-monkey";
 
 function App() {
