@@ -12,6 +12,7 @@
     overflow-x: auto; /* horizontales Scrollen */
     scroll-behavior: smooth; /* weiches Scrollen */
     -webkit-overflow-scrolling: touch; /* besseres Scrollen auf iOS */
+    padding-bottom: 12px;
 }
 
 /* Einzelner Kategorie-Button */
