@@ -1,3 +1,9 @@
+/* --------------------------------------------------------------------
+   Wrapper des Bannerbereichs.
+   - Relative Positionierung ermöglicht Overlay-Elemente (Dunkelheit, Text).
+   - Feste Höhe für konsistentes Layout auf allen Geräten.
+   - Abgerundete Ecken + overflow:hidden verhindern Kantenartefakte.
+-------------------------------------------------------------------- */
 .banner-wrapper {
     position: relative;
     width: 100%;
@@ -6,12 +12,23 @@
     overflow: hidden;
 }
 
+/* --------------------------------------------------------------------
+   Hintergrundbild des Banners.
+   - Füllt die komplette Fläche aus.
+   - object-fit: cover sorgt für saubere Skalierung ohne Verzerrung.
+-------------------------------------------------------------------- */
 .banner-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+/* --------------------------------------------------------------------
+   Abgedunkeltes Overlay auf der rechten Seite.
+   - Verbessert Textkontrast und Fokus.
+   - Halbtransparente schwarze Fläche + leichter Blur für modernen Look.
+   - 45% Breite schafft eine klare visuelle Gewichtung.
+-------------------------------------------------------------------- */
 .banner-dark {
     position: absolute;
     top: 0;
@@ -22,6 +39,11 @@
     backdrop-filter: blur(2px);
 }
 
+/* --------------------------------------------------------------------
+   Textcontainer, der über dem dunklen Bereich positioniert wird.
+   - Vertikal mittig ausgerichtet über translateY(-50%).
+   - Rechtsbündige Ausrichtung passend zur Bildkomposition.
+-------------------------------------------------------------------- */
 .banner-text {
     position: absolute;
     top: 50%;
@@ -32,6 +54,11 @@
     padding-right: 1.5rem;
 }
 
+/* --------------------------------------------------------------------
+   Stilierung der einzelnen Textzeilen.
+   - Einheitliche Typografie.
+   - Kein Margin, damit die Zeilen sauber gestapelt werden.
+-------------------------------------------------------------------- */
 .banner-text h2 {
     font-weight: 600;
     margin: 0;

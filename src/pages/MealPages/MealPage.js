@@ -15,7 +15,7 @@ import "./MealPage.css";
  * - Komponentenlayout folgt Bootstrap Grid
  * ------------------------------------------------------------
  */
-export default function MealPage() {
+function MealPage() {
     const { id } = useParams();
 
     // State für ausgewähltes Rezept
@@ -124,3 +124,5 @@ export default function MealPage() {
         </Container>
     );
 }
+
+export default MealPage;

@@ -6,7 +6,7 @@ import "./AddMeal.css";
 
 /**
  * AddMealPage-Komponente
- * 
+ *
  * Diese Komponente ermöglicht es Benutzern, ein neues Rezept hinzuzufügen.
  * Sie beinhaltet:
  * - Bild-Upload mit Vorschau
@@ -15,7 +15,7 @@ import "./AddMeal.css";
  * - Textbereich für Zubereitungsschritte
  * - Senden der Daten an das Backend
  */
-export default function AddMealPage() {
+function AddMealPage() {
     // State für die Rezeptdaten
     const [name, setName] = useState("");
     const [instructions, setInstructions] = useState("");
@@ -105,7 +105,9 @@ export default function AddMealPage() {
                             <Image src={preview} alt="Preview" fluid className="meal-image" />
                         ) : (
                             <div className="upload-wrapper">
-                                <label htmlFor="thumbnailInput" className="upload-label">+</label>
+                                <label htmlFor="thumbnailInput" className="upload-label">
+                                    +
+                                </label>
                                 <div className="upload-text">Upload Image</div>
                             </div>
                         )}
@@ -131,19 +133,19 @@ export default function AddMealPage() {
                         >
                             <option value="">Category</option>
                             {categories.map((cat) => (
-                                <option key={cat.id} value={cat.id}>{cat.name}</option>
+                                <option key={cat.id} value={cat.id}>
+                                    {cat.name}
+                                </option>
                             ))}
                         </Form.Select>
 
                         {/* Land auswählen */}
-                        <Form.Select
-                            value={areaId}
-                            onChange={(e) => setAreaId(e.target.value)}
-                            className="area-select"
-                        >
+                        <Form.Select value={areaId} onChange={(e) => setAreaId(e.target.value)} className="area-select">
                             <option value="">Country</option>
                             {areas.map((area) => (
-                                <option key={area.id} value={area.id}>{area.name}</option>
+                                <option key={area.id} value={area.id}>
+                                    {area.name}
+                                </option>
                             ))}
                         </Form.Select>
                     </div>
@@ -206,3 +208,5 @@ export default function AddMealPage() {
         </Container>
     );
 }
+
+export default AddMealPage;
