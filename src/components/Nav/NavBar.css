@@ -28,7 +28,7 @@
 .opacity-50 {
     background-color: #d2691e;
     height: 1px;
-    border: none; 
+    border: none;
 }
 /* =============================================
    RESPONSIVE – Tablets und kleinere Displays
@@ -69,5 +69,8 @@
         width: 70px;
         height: 28px;
         font-size: 0.65rem;
+    }
+    .small-placeholder::placeholder {
+        font-size: 10px;
     }
 }

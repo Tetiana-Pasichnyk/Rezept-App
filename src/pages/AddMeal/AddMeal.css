@@ -1,6 +1,6 @@
 /******************************************************
  * Allgemeine Seite (Meal Page)
- * Grundlegendes Layout und Schriftarten
+ * Grundlegendes Layout, Schriftarten, Full-Width
  ******************************************************/
 .meal-page {
     width: 100%;
@@ -8,19 +8,19 @@
 
 /******************************************************
  * Bild-Box (Meal Image Box)
- * Enthält das hochgeladene Bild oder Upload-Button
+ * Container für hochgeladenes Bild oder Upload-Button
  ******************************************************/
 .meal-image-box {
-    background-color: #2f2727; /* dunkler Hintergrund für Bildbereich */
+    background-color: #2f2727; /* dunkler Hintergrund für bessere Bildpräsentation */
     display: flex;
     align-items: center;
     justify-content: center;
     height: 400px;
     border-radius: 8px;
-    position: relative;
+    position: relative; /* für absolute Positionierung von inneren Elementen */
 }
 
-/* Label für Bild-Upload */
+/* Upload-Button (Kreis) */
 .upload-label {
     width: 80px;
     height: 80px;
@@ -34,12 +34,12 @@
     cursor: pointer;
     transition: transform 0.2s, background-color 0.2s;
     user-select: none;
-    background-color: #2f2727; /* Hintergrund passend zur Box */
+    background-color: #2f2727;
     border: 2px solid #fff;
 }
 .upload-label:hover {
     background-color: #eddae0;
-    transform: scale(1.1);
+    transform: scale(1.1); /* leichtes Hover-Zoom für bessere Interaktion */
 }
 
 /* Wrapper für Upload-Button + Text */
@@ -69,7 +69,7 @@
 
 /******************************************************
  * Titel-Box (Meal Title Box)
- * Enthält Name, Kategorie und Land
+ * Enthält Name, Kategorie und Herkunftsland
  ******************************************************/
 .meal-title-box {
     display: flex;
@@ -78,14 +78,14 @@
     gap: 0.5rem;
 }
 
-/* Eingabefeld für den Meal Name */
+/* Input für Gerichtsname */
 .meal-title-box input[type="text"] {
     text-align: center;
     font-size: 1.25rem;
     font-weight: bold;
 }
 
-/* Select-Felder für Kategorie und Land */
+/* Select-Felder für Kategorie und Herkunft */
 .meal-title-box select {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -104,24 +104,24 @@
 
 /******************************************************
  * Anleitungen & Zutaten-Karten
- * Einheitliche Styles für die zwei Hauptkarten
+ * Einheitliches Design: abgerundete Ecken, Schatten
  ******************************************************/
 .meal-instructions,
 .meal-ingredients {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    min-height: 400px; /* Einheitliche Höhe */
+    min-height: 400px; /* gleiche Höhe für Layout-Konsistenz */
 }
 
 /* Textarea für Anleitungen */
 .meal-instructions textarea {
-    resize: none;
+    resize: none; /* verhindert Größenänderung */
 }
 
 /******************************************************
  * Zutatenreihe (Ingredient Row)
- * Enthält Eingabefelder für Name und Menge sowie Entfernen-Button
+ * Enthält Name, Menge und Entfernen-Button
  ******************************************************/
 .meal-ingredients .btn-danger {
     background-color: #d2691e;
@@ -137,6 +137,7 @@
     border: none;
     color: black;
     border-radius: 80px;
+    transition: background-color 0.3s ease;
 }
 .meal-ingredients .btn-secondary:hover {
     background-color: #eddae0;
@@ -150,7 +151,115 @@
     border: none;
     color: #000;
     border-radius: 80px;
+    transition: background-color 0.3s ease;
 }
 .meal-ingredients .btn-primary:hover {
     background-color: #3e5f84;
+}
+
+/******************************************************
+ * MODAL WINDOWS (Error & Success)
+ ******************************************************/
+.modal-backdrop.show {
+    opacity: 0.55 !important;
+    background-color: #000; /* sanfte Verdunkelung */
+}
+
+.modal-content {
+    border-radius: 12px !important;
+    border: none !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Header */
+.modal-header {
+    background-color: #eddae0 !important;
+    border-bottom: none !important;
+    border-radius: 12px 12px 0 0 !important;
+}
+
+/* Titel */
+.modal-title {
+    font-weight: bold;
+    color: #2f2727;
+    font-size: 1.3rem;
+}
+
+/* Body */
+.modal-body {
+    padding: 1.5rem;
+    font-size: 1.1rem;
+    color: #d2691e;
+}
+
+/* Footer */
+.modal-footer {
+    border-top: none !important;
+    padding: 1rem 1.5rem;
+}
+
+.modal-footer .btn-primary {
+    background-color: #49709c;
+    border-radius: 40px;
+    padding: 0.5rem 1.4rem;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+.modal-footer .btn-primary:hover {
+    background-color: #3e5f84;
+}
+
+.modal-footer .btn-secondary {
+    background-color: #eddae0;
+    border-radius: 40px;
+    padding: 0.5rem 1.4rem;
+    color: #000;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+.modal-footer .btn-secondary:hover {
+    background-color: #e0c7d0;
+}
+
+/* Animation für Modal-Einblendung */
+.modal.fade .modal-dialog {
+    transform: translateY(-30px);
+    transition: transform 0.25s ease-out;
+}
+.modal.show .modal-dialog {
+    transform: translateY(0);
+}
+
+/******************************************************
+ * Pflichtfeld-Hervorhebung (Required Fields)
+ ******************************************************/
+.required-highlight {
+    border: 2px solid #d2691e !important; /* rote Umrandung */
+    background-color: #fff5f5 !important; /* leichter roter Hintergrund */
+    border-radius: 8px;
+    transition: 0.3s ease;
+}
+
+/* Highlight verschwindet bei Fokussierung */
+input.required-highlight:focus,
+textarea.required-highlight:focus,
+select.required-highlight:focus {
+    border-color: #49709c !important;
+    background-color: white !important;
+}
+
+/* Spezieller Error-Modal-Button */
+.btn-error-modal {
+    background-color: #d2691e !important;
+    border: 2px solid #d2691e;
+    color: #fff;
+    border-radius: 40px;
+    padding: 0.5rem 1.4rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+.btn-error-modal:hover {
+    background-color: #b65a18 !important;
+    border-color: #b65a18;
+    color: #fff;
 }

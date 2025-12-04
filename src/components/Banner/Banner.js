@@ -36,12 +36,13 @@ function Banner() {
                 gestaffelten typografischen Effekts.
             ---------------------------------------------------------- */}
             <div className="banner-text">
-                <h2>Dein</h2>
-                <h2>digitales</h2>
-                <h2>Kochbuch</h2>
+                <h2>Your</h2>
+                <h2>digital</h2>
+                <h2>Сookbook</h2>
             </div>
         </div>
     );
 }
 
 export default Banner;
+  
