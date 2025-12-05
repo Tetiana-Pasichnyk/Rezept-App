@@ -2,8 +2,14 @@
   border-top-color: #d2691e !important;
 }
 
+.nav-item:hover {
+  background-color: #d2691e;
+
+opacity: 0.8;
+}
 .nav-buttons {
   margin-left: 40px;
+  
 }
 
 .nav-buttons > button {

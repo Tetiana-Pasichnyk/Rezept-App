@@ -3,15 +3,31 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import "./Nav.css";
+import { useState, useEffect } from "react";
 
 function Nav() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  //get login status
+  useEffect(() => {
+    const loggedStatus = localStorage.getItem("loggedIn") === "true";
+    setIsLoggedIn(loggedStatus);
+  }, []);
+
+  //remove localStorage key
+  const handleLogout = () => {
+    localStorage.removeItem("loggedIn");
+    setIsLoggedIn(false);
+    window.location.href = "http://localhost:3000";
+  };
+
   return (
     <div className="mx-5 nav-bar ">
       <nav className="navbar navbar-expand-lg navbar-light bg-light px-4 ">
         <div className="container-fluid d-flex justify-content-center items-center mt-2">
           {/* nav-left */}
           <div className="navbar-brand d-none d-md-block">
-            <i className="bi bi-book"></i> Super Rezept
+            <i className="bi bi-book"></i> Super Recipe
           </div>
 
           {/* search bar */}
@@ -38,44 +54,101 @@ function Nav() {
           </form>
 
           {/* nav-right */}
-          <div className="d-flex align-items-center nav-right">
-            {/* menu drop-down */}
-            <button
-              className="navbar-toggler"
-              type="button"
-              style={{ fontSize: "0.8rem" }}
-              data-bs-toggle="collapse"
-              data-bs-target="#navMenu"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
+          {!isLoggedIn ? (
+            <div className="d-flex align-items-center nav-right">
+              {/* menu drop-down */}
+              <button
+                className="navbar-toggler"
+                type="button"
+                style={{ fontSize: "0.8rem" }}
+                data-bs-toggle="collapse"
+                data-bs-target="#navMenu"
+              >
+                <span className="navbar-toggler-icon"></span>
+              </button>
 
-            <div className="collapse navbar-collapse" id="navMenu">
-              <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li className="nav-item">
-                  <a
-                    className="nav-link active text-dark"
-                    aria-current="page"
-                    href="#"
-                  >
-                    <i className="bi bi-house-door"></i> Home
-                    &nbsp;&nbsp;&nbsp;|
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link text-dark" href="#">
-                    <i className="bi bi-plus-circle"></i> neues Rezept
-                    &nbsp;&nbsp;&nbsp;|
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link text-dark" href="#">
-                    <i className="bi bi-person"></i> log-in
-                  </a>
-                </li>
-              </ul>
+              <div className="collapse navbar-collapse" id="navMenu">
+                <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                  <li className="nav-item">
+                    <a
+                      className="nav-link active text-dark"
+                      aria-current="page"
+                      href="http://localhost:3000/"
+                    >
+                      <i className="bi bi-house-door"></i> Home
+                      &nbsp;&nbsp;&nbsp;|
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className="nav-link text-dark"
+                      href="http://localhost:3000/login"
+                    >
+                      <i className="bi bi-plus-circle"></i> Add Recipe
+                      &nbsp;&nbsp;&nbsp;|
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className="nav-link text-dark"
+                      href="http://localhost:3000/login"
+                    >
+                      <i className="bi bi-person"></i> Log in
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
+          ) : (
+            // right nav-bar, render after login
+            <div className="d-flex align-items-center nav-right">
+              {/* menu drop-down */}
+              <button
+                className="navbar-toggler"
+                type="button"
+                style={{ fontSize: "0.8rem" }}
+                data-bs-toggle="collapse"
+                data-bs-target="#navMenu"
+              >
+                <span className="navbar-toggler-icon"></span>
+              </button>
+
+              <div className="collapse navbar-collapse" id="navMenu">
+                <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                  <li className="nav-item">
+                    <a
+                      className="nav-link active text-dark"
+                      aria-current="page"
+                      href="http://localhost:3000/"
+                    >
+                      <i className="bi bi-house-door"></i> Home
+                      &nbsp;&nbsp;&nbsp;|
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link text-dark" href="#">
+                      <i className="bi bi-book"></i> My Recipe
+                      &nbsp;&nbsp;&nbsp;|
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link text-dark" href="#">
+                      <i className="bi bi-plus-circle"></i> Add Recipe
+                      &nbsp;&nbsp;&nbsp;|
+                    </a>
+                  </li>
+                  <li className="nav-item" onClick={() => handleLogout()}>
+                    <a
+                      className="nav-link text-dark"
+                      href="http://localhost:3000/"
+                    >
+                      <i className="bi bi-person"></i> Log out
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
