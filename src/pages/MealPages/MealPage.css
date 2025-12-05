@@ -1,0 +1,116 @@
+/******************************************************
+ * MealPage – Global Layout Styles
+ ******************************************************/
+.meal-page {
+    width: 100%;
+}
+
+/******************************************************
+ * Header Bereich (Bild + Titel)
+ ******************************************************/
+
+/* Rezeptbild */
+.meal-image.meal-image {
+    height: 400px;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Box mit Rezepttitel */
+.meal-title-box.meal-title-box {
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eddae0;
+}
+
+/******************************************************
+ * Instructions & Ingredients Cards
+ ******************************************************/
+.meal-instructions {
+    background-color: #ffffff;
+}
+
+.card.meal-ingredients {
+    background-color: #e0e0e0;
+}
+/******************************************************
+ * Portion Selector
+ ******************************************************/
+.portion-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.portion-btn {
+    background-color: #b0b0b0;
+    border: none;
+    padding: 5px 12px;
+    font-weight: bold;
+}
+
+.portion-btn:hover {
+    background-color: #9a9a9a;
+}
+
+.portion-display {
+    margin: 0 12px;
+}
+
+/******************************************************
+ * Ingredients Table
+ ******************************************************/
+.ingredients-table {
+    width: 100%;
+    background-color: #e0e0e0;
+    color: #555;
+    border-collapse: collapse;
+}
+
+.ingredients-table th,
+.ingredients-table td {
+    padding: 8px;
+}
+
+.ingredients-table th {
+    font-weight: bold;
+}
+/******************************************************
+ * Header Image – Desktop
+ ******************************************************/
+.meal-image.meal-image {
+    height: 400px;
+    width: 100%;
+    object-fit: cover;
+}
+
+/******************************************************
+ * Titelbox – Desktop
+ ******************************************************/
+.meal-title-box.meal-title-box {
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eddae0;
+}
+
+/******************************************************
+ * Responsive Anpassung – Smartphones
+ * ----------------------------------------------------
+ * Breakpoint: max-width: 576px (Bootstrap: "sm")
+ * - Bildhöhe wird reduziert
+ * - Titelbox wird ebenfalls verkleinert
+ ******************************************************/
+@media (max-width: 576px) {
+    .meal-image.meal-image {
+        height: 250px; /* kleiner für mobile */
+    }
+
+    .meal-title-box.meal-title-box {
+        height: 250px; /* passende Höhe für mobile */
+    }
+}
