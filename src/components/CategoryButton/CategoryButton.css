@@ -1,0 +1,36 @@
+/* =============================================
+   KATEGORIEN-SLIDER – horizontale Scrollliste
+   ============================================= */
+.category-container {
+    max-width: 50vw; /* auf die halbe Bildschirmbreite begrenzt */
+    margin: 0 auto;
+}
+
+.category-scroll {
+    display: flex;
+    gap: 10px; /* Abstand zwischen Buttons */
+    overflow-x: auto; /* horizontales Scrollen */
+    scroll-behavior: smooth; /* weiches Scrollen */
+    -webkit-overflow-scrolling: touch; /* besseres Scrollen auf iOS */
+    padding-bottom: 12px;
+}
+
+/* Einzelner Kategorie-Button */
+.category-pill {
+    flex: 0 0 auto; /* verhindert Zusammenquetschen */
+    width: calc(50vw / 7); /* proportional zur Containerbreite */
+    height: 40px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center; /* vertikale Zentrierung */
+    justify-content: center; /* horizontale Zentrierung */
+    padding: 0 8px;
+    margin-bottom: 12px;
+    border-radius: 90px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.category-pill.active {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* слегка «выпуклый» эффект */
+    transform: scale(1.05); /* чуть увеличена */
+}

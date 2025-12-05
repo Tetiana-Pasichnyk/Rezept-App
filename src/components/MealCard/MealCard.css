@@ -1,3 +1,9 @@
+/* --------------------------------------------------------------
+   Root-Container der Rezeptkarte.
+   - Quadratisches Seitenverhältnis für ein einheitliches Grid.
+   - Sanfte Schatten + abgerundete Kanten für modernes Card-Design.
+   - Übergangseffekte verbessern visuelle Interaktion (Hover etc.).
+-------------------------------------------------------------- */
 .meal-card {
     width: 100%;
     max-width: 330px;
@@ -11,12 +17,23 @@
     position: relative;
 }
 
+/* --------------------------------------------------------------
+   Rezeptbild.
+   - Objektfüllend, ohne Verzerrung.
+   - Deckt die komplette Card-Fläche ab.
+-------------------------------------------------------------- */
 .meal-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+/* --------------------------------------------------------------
+   Informationsbereich am unteren Rand.
+   - Halbtransparent + Blur für "Glassmorphism"-Effekt.
+   - Absolut positioniert, damit er unabhängig vom Bild liegt.
+   - Flex-Layout für konsistente Ausrichtung von Titel & Button.
+-------------------------------------------------------------- */
 .meal-info {
     position: absolute;
     bottom: 0;
@@ -30,11 +47,20 @@
     align-items: center;
 }
 
+/* --------------------------------------------------------------
+   Titel des Rezepts.
+   - Dezent größer und fett, damit er sich vom Untertitel abhebt.
+-------------------------------------------------------------- */
 .meal-title {
     font-weight: bold;
     font-size: 15px;
 }
 
+/* --------------------------------------------------------------
+   Untertitel (Kategorie | Herkunft).
+   - Farblich hervorgehoben, um Kontext sofort sichtbar zu machen.
+   - Geringere Deckkraft für subtileren Look.
+-------------------------------------------------------------- */
 .meal-subtitle {
     font-weight: bold;
     font-size: 13px;
@@ -42,6 +68,11 @@
     color: #d2691e;
 }
 
+/* --------------------------------------------------------------
+   Button zur Rezeptdetailseite.
+   - Minimalistisches Design, damit er nicht vom Inhalt ablenkt.
+   - Kleine Rundung + Hover-Effekt für bessere UX.
+-------------------------------------------------------------- */
 .detail-btn {
     background: #fff;
     border: 1px solid #ddd;

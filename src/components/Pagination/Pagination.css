@@ -6,11 +6,13 @@
     cursor: pointer;
 }
 
+/* Disabled-State: optische Abschwächung und deaktivierter Cursor */
 .pagination-btn:disabled {
     opacity: 0.4;
     cursor: not-allowed;
 }
 
+/* Textdarstellung der Seitenangabe */
 .pagination-text {
     font-size: 18px;
 }
