@@ -18,47 +18,61 @@ import "./CategoryButton.css";
  * --------------------------------------------------------------
  */
 function CategoryButton({ categories = [], activeCategory, onCategorySelect }) {
-    return (
-        <div className="category-container py-2">
-            {/* --------------------------------------------------------------
+  return (
+    <div className="category-container py-2">
+      {/* --------------------------------------------------------------
                 Scrollbarer Wrapper.
                 - Dient als horizontale Kategorie-Navigation.
                 - overflow-auto stellt sicher, dass viele Kategorien
                   auch auf kleinen Bildschirmen erreichbar bleiben.
             -------------------------------------------------------------- */}
-            <div className="category-scroll d-flex overflow-auto px-2">
-                {/* ----------------------------------------------------------
+      <div className="category-scroll d-flex overflow-auto px-2">
+        {/* ----------------------------------------------------------
                     "All"-Button.
                     Repräsentiert die Reset-Option für Filter.
                     Wird visuell wie die Kategorien behandelt, aber mit
                     festem Farbwert.
                 ---------------------------------------------------------- */}
-                <Button
-                    className={`category-pill me-2 ${activeCategory === null ? "active" : ""}`}
-                    onClick={() => onCategorySelect(null)}
-                    style={{ backgroundColor: "#f94143", color: "#000", border: "none", borderRadius: "20px" }}
-                >
-                    All
-                </Button>
+        <Button
+          className={`category-pill me-2 ${
+            activeCategory === null ? "active" : ""
+          }`}
+          onClick={() => onCategorySelect(null)}
+          style={{
+            backgroundColor: "#f94143",
+            color: "#000",
+            border: "none",
+            borderRadius: "20px",
+          }}
+        >
+          All
+        </Button>
 
-                {/* ----------------------------------------------------------
+        {/* ----------------------------------------------------------
                     Dynamisch generierte Kategorie-Buttons.
                     - Jeder Button erhält die spezifische Farbe der Kategorie.
                     - activeCategory wird genutzt, um eine visuelle Markierung
                       für die aktuelle Auswahl zu setzen.
                 ---------------------------------------------------------- */}
-                {categories.map((cat) => (
-                    <Button
-                        key={cat.id}
-                        className={`category-pill me-2 ${activeCategory === cat.name ? "active" : ""}`}
-                        onClick={() => onCategorySelect(cat.name)}
-                        style={{ backgroundColor: cat.color, color: "#000", border: "none", borderRadius: "20px" }}
-                    >
-                        {cat.name}
-                    </Button>
-                ))}
-            </div>
-        </div>
-    );
+        {categories.map((cat) => (
+          <Button
+            key={cat.id}
+            className={`category-pill me-2 ${
+              activeCategory === cat.name ? "active" : ""
+            }`}
+            onClick={() => onCategorySelect(cat.name)}
+            style={{
+              backgroundColor: cat.color,
+              color: "#000",
+              border: "none",
+              borderRadius: "20px",
+            }}
+          >
+            {cat.name}
+          </Button>
+        ))}
+      </div>
+    </div>
+  );
 }
 export default CategoryButton;
