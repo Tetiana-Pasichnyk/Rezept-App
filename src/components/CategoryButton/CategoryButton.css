@@ -13,6 +13,7 @@
     scroll-behavior: smooth; /* weiches Scrollen */
     -webkit-overflow-scrolling: touch; /* besseres Scrollen auf iOS */
     padding-bottom: 12px;
+    margin-bottom: 20px !important;
 }
 
 /* Einzelner Kategorie-Button */
@@ -33,4 +34,89 @@
 .category-pill.active {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* слегка «выпуклый» эффект */
     transform: scale(1.05); /* чуть увеличена */
+}
+/* ============================
+   MOBILE ADAPTATION
+   ============================ */
+@media (max-width: 480px) {
+    .category-container {
+        max-width: 100vw !important;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .category-scroll {
+        gap: 6px !important;           /* чуть меньше расстояние */
+        padding-bottom: 6px;
+        overflow-x: auto;
+    }
+
+    .category-pill {
+        flex: 0 0 30% ;       /* чуть меньше, чтобы поместились 3 кнопки */
+        box-sizing: border-box;
+        height: 30px;        /* меньше высота */
+        font-size: 0.rem !important;  /* компактный текст */
+        padding: 0 6px;
+        border-radius: 40px; /* чуть более округлые */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+/* =============================================
+   TABLET ADAPTATION (481px - 768px)
+   ============================================= */
+@media (min-width: 481px) and (max-width: 768px) {
+    .category-container {
+        max-width: 90vw; /* чуть шире, чем на мобилке */
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .category-scroll {
+        gap: 8px;          /* чуть больше расстояние между кнопками */
+        padding-bottom: 8px;
+        overflow-x: auto;
+    }
+
+    .category-pill {
+        flex: 0 0 22%;      /* примерно 4 кнопки на экран */
+        box-sizing: border-box;
+        height: 34px;       /* чуть выше, чем на мобилке */
+        font-size: 0.8rem;  /* чуть больше текст */
+        padding: 0 8px;
+        border-radius: 45px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+/* =============================================
+   MEDIUM SCREENS (769px - 1024px)
+   ============================================= */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .category-container {
+        max-width: 50vw;   /* аналогично десктопу */
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .category-scroll {
+        gap: 9px;          /* промежуточный gap */
+        padding-bottom: 10px;
+        overflow-x: auto;
+    }
+
+    .category-pill {
+        flex: 0 0 14%;      /* примерно 7 кнопок на экран */
+        box-sizing: border-box;
+        height: 38px;       /* чуть меньше десктопной */
+        font-size: 0.85rem; /* чуть меньше десктопной */
+        padding: 0 10px;
+        border-radius: 50px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }

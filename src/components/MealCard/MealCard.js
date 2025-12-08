@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./MealCard.css";
 
-function MealCard({ meal, isFavorite, toggleFavorite }) {
+function MealCard({ meal, isFavorite, toggleFavorite, showFavorite = true }) {
     // ------------------------------
     // useNavigate Hook für Navigation zu Detailseite
     // ------------------------------
@@ -20,21 +20,23 @@ function MealCard({ meal, isFavorite, toggleFavorite }) {
                 Favoriten-Button (Toggle)
                 Positioniert oben rechts, Farbe abhängig vom Favoritenstatus
             ------------------------------ */}
-            <button
-                onClick={() => toggleFavorite(meal)}
-                style={{
-                    position: "absolute",
-                    top: "10px",
-                    right: "10px",
-                    background: "transparent",
-                    border: "none",
-                    fontSize: "24px",
-                    cursor: "pointer",
-                    color: isFavorite ? "red" : "white",
-                }}
-            >
-                {isFavorite ? "❤️" : "🤍"}
-            </button>
+            {showFavorite && (
+                <button
+                    onClick={() => toggleFavorite(meal)}
+                    style={{
+                        position: "absolute",
+                        top: "10px",
+                        right: "10px",
+                        background: "transparent",
+                        border: "none",
+                        fontSize: "24px",
+                        cursor: "pointer",
+                        color: isFavorite ? "red" : "white",
+                    }}
+                >
+                    {isFavorite ? "❤️" : "🤍"}
+                </button>
+            )}
 
             {/* ------------------------------
                 Informationen zum Meal: Name, Kategorie, Herkunft

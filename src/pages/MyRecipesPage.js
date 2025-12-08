@@ -47,7 +47,7 @@ function MyRecipesPage() {
 
     return (
         <div className="container mt-4">
-            <Banner />
+            <Banner lines={["Your", "personal", "recipes"]} />
 
             <div className="row g-4 mt-4">
                 {currentRecipes.length === 0 && <p>You haven't added any recipes yet!</p>}
@@ -57,9 +57,10 @@ function MyRecipesPage() {
                         <MealCard
                             meal={{
                                 ...meal,
-                                thumbnail: meal.thumbnail || "https://via.placeholder.com/300x200", // fallback image
+                                thumbnail:
+                                    "https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=80&w=1065&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                             }}
-                            isFavorite={false}
+                            showFavorite={false}
                         />
                     </div>
                 ))}

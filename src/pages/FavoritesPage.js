@@ -44,7 +44,7 @@ function FavoritesPage() {
     return (
         <div>
             <div className="container mt-4">
-                <Banner />
+                <Banner lines={["Your", "favorite", "recipes"]} />
 
                 <div className="row g-4 mt-4">
                     {/* Hinweis, falls keine Favoriten vorhanden sind */}

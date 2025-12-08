@@ -45,14 +45,15 @@ function Home() {
 
     return (
         <div>
-            <CategoryButton
+            
+
+            <div className="container mt-4">
+                <Banner lines={["Your", "digital", "Сookbook"]} />
+                <CategoryButton
                 categories={categories}
                 activeCategory={selectedCategory}
                 onCategorySelect={handleCategorySelect}
             />
-
-            <div className="container mt-4">
-                <Banner />
 
                 <div className="row g-4">
                     {currentMeals.map((meal) => (

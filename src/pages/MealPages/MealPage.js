@@ -51,13 +51,16 @@ function MealPage() {
             ------------------------------------------------------------ */}
             <Row className="mb-4 g-0">
                 <Col md={7}>
-                    <Image src={meal.thumbnail} alt={meal.name} fluid className="meal-image" />
-                </Col>
-
-                <Col md={5}>
-                    <div className="meal-title-box">
-                        <h1 className="text-center">{meal.name}</h1>
-                    </div>
+                    <Image
+                        src={
+                            meal.thumbnail && meal.thumbnail.trim() !== ""
+                                ? meal.thumbnail
+                                : "https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=80&w=1065&auto=format&fit=crop&ixlib=rb-4.1.0"
+                        }
+                        alt={meal.name}
+                        fluid
+                        className="meal-image"
+                    />
                 </Col>
             </Row>
 
