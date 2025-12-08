@@ -12,6 +12,8 @@ import Footer from "./components/Footer/Footer";
 import Impressum from "./components/Footer/Impressum";
 import Datenshutz from "./components/Footer/Datenshutz";
 
+import { AuthProvider } from "./context/AuthContext";
+
 function App() {
   const location = useLocation();
   const hideNav =
@@ -19,21 +21,23 @@ function App() {
     location.pathname.toLowerCase() === "/register";
 
   return (
-    <SearchProvider>
-      {/* ------move <BrowserRouter>  add <></> */}
-      {!hideNav && <NavBar />}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/meal/:id" element={<MealPage />} />
-        <Route path="/add-meal" element={<AddMeal />} />
+    <AuthProvider>
+      <SearchProvider>
+        {/* ------move <BrowserRouter>  add <></> */}
+        {!hideNav && <NavBar />}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/meal/:id" element={<MealPage />} />
+          <Route path="/add-meal" element={<AddMeal />} />
 
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/impressum" element={<Impressum />} />
-        <Route path="/data-protection" element={<Datenshutz />} />
-      </Routes>
-      {!hideNav && <Footer />}
-    </SearchProvider>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/impressum" element={<Impressum />} />
+          <Route path="/data-protection" element={<Datenshutz />} />
+        </Routes>
+        {!hideNav && <Footer />}
+      </SearchProvider>
+    </AuthProvider>
   );
 }
 

@@ -20,7 +20,7 @@ function Register() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Sanitize phone number
+    //  phone number
     const sanitizedValue =
       name === "phone_number" ? value.replace(/\D/g, "") : value;
 
@@ -76,12 +76,17 @@ function Register() {
           password: "",
           password2: "",
         });
+        // Redirect to home after successful registration
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 2000);
       }
     } catch (err) {
       console.error("API Error:", err);
       setMessage("Server error, please try again.");
     }
   };
+
   // -------------
 
   return (
@@ -90,7 +95,7 @@ function Register() {
         <div className="mx-5 my-4 content-box">
           <div className="d-flex flex-column register-content">
             <a
-              href="http://localhost:3000/"
+              href="/"
               className="d-flex flex-row text-decoration-none"
               style={{ color: "black" }}
             >
@@ -132,7 +137,7 @@ function Register() {
               <input
                 className="form-control underline-input"
                 type="text"
-                placeholder="FIRST NAME"
+                placeholder="* FIRST NAME"
                 aria-label="FIRST NAME"
                 name="first_name"
                 value={form.first_name}
@@ -141,7 +146,7 @@ function Register() {
               <input
                 className="form-control underline-input"
                 type="text"
-                placeholder="LAST NAME"
+                placeholder="* LAST NAME"
                 aria-label="LAST NAME"
                 name="last_name"
                 value={form.last_name}
@@ -160,7 +165,7 @@ function Register() {
                 ></input>
               </div>
               <div className="flex-grow-1">
-                <label className="form-label">MOBILE NUMBER</label>
+                <label className="form-label">* MOBILE NUMBER</label>
                 <input
                   className="form-control underline-input"
                   type="text"
@@ -200,7 +205,7 @@ function Register() {
             </button>
             <a
               role="button"
-              href="http://localhost:3000/login"
+              href="/login"
               className="btn  mt-2 mb-5 login-button "
             >
               LOG IN

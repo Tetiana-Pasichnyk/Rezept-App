@@ -4,7 +4,7 @@ import MealCard from "../components/MealCard/MealCard";
 import Pagination from "../components/Pagination/Pagination";
 import CategoryButton from "../components/CategoryButton/CategoryButton";
 import Banner from "../components/Banner/Banner";
-
+// import { FavoriteContext } from "../context/FavoriteContext";
 /**
  * @component Home
  * Hauptseite der App. Verantwortlich für:
@@ -22,6 +22,7 @@ function Home() {
   const [meals, setMeals] = useState([]); // Alle geladenen Mahlzeiten
   const [categories, setCategories] = useState([]); // Kategorien vom Backend
   const [favorites, setFavorites] = useState([]); // Favoritenliste
+
   const [currentPage, setCurrentPage] = useState(1); // Aktuelle Pagination-Seite
   const [selectedCategory, setSelectedCategory] = useState(null); // Ausgewählte Kategorie
   const itemsPerPage = 9; // Anzahl der Items pro Seite
