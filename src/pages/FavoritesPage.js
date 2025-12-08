@@ -1,0 +1,77 @@
+import { useContext, useState } from "react";
+import { SearchContext } from "../context/SearchContext";
+import { FavoritesContext } from "../context/FavoritesContext";
+import MealCard from "../components/MealCard/MealCard";
+import Pagination from "../components/Pagination/Pagination";
+import Banner from "../components/Banner/Banner";
+
+function FavoritesPage() {
+    // ------------------------------
+    // Zugriff auf globale Contexts
+    // SearchContext: enthält Suchbegriff
+    // FavoritesContext: enthält Favoritenliste und Toggle-Funktion
+    // ------------------------------
+    const { searchTerm } = useContext(SearchContext);
+    const { favorites, toggleFavorite } = useContext(FavoritesContext);
+
+    // ------------------------------
+    // Lokaler State für Pagination
+    // ------------------------------
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 9; // Anzahl der angezeigten Elemente pro Seite
+
+    // ------------------------------
+    // Filterung der Favoriten nach Suchbegriff
+    // Groß-/Kleinschreibung wird ignoriert
+    // ------------------------------
+    const filteredMeals = favorites.filter((meal) => meal.name.toLowerCase().includes(searchTerm.toLowerCase()));
+
+    // ------------------------------
+    // Pagination-Logik
+    // Berechnung der Start- und Endindizes für das aktuelle Seiten-Array
+    // ------------------------------
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentMeals = filteredMeals.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(filteredMeals.length / itemsPerPage);
+
+    // ------------------------------
+    // Rendern der UI
+    // Banner, MealCards, Pagination
+    // ------------------------------
+    return (
+        <div>
+            <div className="container mt-4">
+                <Banner />
+
+                <div className="row g-4 mt-4">
+                    {/* Hinweis, falls keine Favoriten vorhanden sind */}
+                    {currentMeals.length === 0 && <p>No favorite meals yet!</p>}
+
+                    {/* Darstellung der aktuellen Seite mit MealCards */}
+                    {currentMeals.map((meal) => (
+                        <div key={meal.id} className="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
+                            <MealCard
+                                meal={meal}
+                                isFavorite={true} // Favoritenstatus wird immer true sein
+                                toggleFavorite={toggleFavorite}
+                            />
+                        </div>
+                    ))}
+                </div>
+
+                {/* Pagination-Komponente nur anzeigen, wenn Elemente vorhanden */}
+                {currentMeals.length > 0 && (
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPrev={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                        onNext={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                    />
+                )}
+            </div>
+        </div>
+    );
+}
+
+export default FavoritesPage;
