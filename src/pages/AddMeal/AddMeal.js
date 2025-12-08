@@ -1,29 +1,33 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // <-- для редиректа
+import { useNavigate } from "react-router-dom"; // Navigation / Redirect
 import { Container, Row, Col, Form, Button, Image, Modal } from "react-bootstrap";
 import { HiX } from "react-icons/hi";
 
 import "./AddMeal.css";
 
+// ------------------------------
+// AddMealPage-Komponente
+// Ermöglicht das Hinzufügen eines neuen Gerichts inkl. Bild, Kategorien, Länder und Zutaten
+// ------------------------------
 function AddMealPage() {
-    const navigate = useNavigate(); // <-- получаем функцию navigate
+    const navigate = useNavigate(); // Funktion für programmatische Navigation / Redirect
 
-    // -------------------------
-    // Form state
-    // -------------------------
-    const [name, setName] = useState("");
-    const [instructions, setInstructions] = useState("");
-    const [ingredients, setIngredients] = useState([{ ingredient: "", measure: "" }]);
-    const [thumbnail, setThumbnail] = useState(null);
-    const [preview, setPreview] = useState(null);
+    // ------------------------------
+    // Formular-States
+    // ------------------------------
+    const [name, setName] = useState(""); // Name des Gerichts
+    const [instructions, setInstructions] = useState(""); // Zubereitungsanleitung
+    const [ingredients, setIngredients] = useState([{ ingredient: "", measure: "" }]); // Zutatenliste
+    const [thumbnail, setThumbnail] = useState(null); // Hochgeladenes Bild
+    const [preview, setPreview] = useState(null); // Vorschaubild für Upload
 
-    const [categories, setCategories] = useState([]);
-    const [areas, setAreas] = useState([]);
-    const [categoryId, setCategoryId] = useState("");
-    const [areaId, setAreaId] = useState("");
+    const [categories, setCategories] = useState([]); // Liste verfügbarer Kategorien
+    const [areas, setAreas] = useState([]); // Liste verfügbarer Länder
+    const [categoryId, setCategoryId] = useState(""); // Ausgewählte Kategorie
+    const [areaId, setAreaId] = useState(""); // Ausgewähltes Land
 
-    const [showErrorModal, setShowErrorModal] = useState(false);
-    const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [showErrorModal, setShowErrorModal] = useState(false); // Modal bei Validierungsfehler
+    const [showSuccessModal, setShowSuccessModal] = useState(false); // Modal bei erfolgreichem Speichern
 
     const [highlight, setHighlight] = useState({
         name: false,
@@ -31,13 +35,13 @@ function AddMealPage() {
         categoryId: false,
         areaId: false,
         ingredients: false,
-    });
+    }); // Hervorhebung von Pflichtfeldern
 
-    const [pendingValidation, setPendingValidation] = useState(null);
+    const [pendingValidation, setPendingValidation] = useState(null); // Temporärer State für Validierung
 
-    // -------------------------
-    // Load categories and areas
-    // -------------------------
+    // ------------------------------
+    // Kategorien und Länder beim Mounten laden
+    // ------------------------------
     useEffect(() => {
         fetch("http://localhost:8888/rezept-plattform/backend/get-categories-areas.php")
             .then((res) => res.json())
@@ -45,12 +49,12 @@ function AddMealPage() {
                 setCategories(data.categories || []);
                 setAreas(data.areas || []);
             })
-            .catch((err) => console.error("Error loading categories/areas:", err));
+            .catch((err) => console.error("Fehler beim Laden der Kategorien/Länder:", err));
     }, []);
 
-    // -------------------------
-    // Ingredients handlers
-    // -------------------------
+    // ------------------------------
+    // Zutaten-Handler
+    // ------------------------------
     const handleIngredientChange = (index, field, value) => {
         const newIngredients = [...ingredients];
         newIngredients[index][field] = value;
@@ -64,18 +68,18 @@ function AddMealPage() {
         if (ingredients.length > 1) setIngredients(ingredients.filter((_, i) => i !== index));
     };
 
-    // -------------------------
-    // File upload
-    // -------------------------
+    // ------------------------------
+    // Bild-Upload
+    // ------------------------------
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         setThumbnail(file);
-        setPreview(file ? URL.createObjectURL(file) : null);
+        setPreview(file ? URL.createObjectURL(file) : null); // Vorschau generieren
     };
 
-    // -------------------------
-    // Highlight helpers
-    // -------------------------
+    // ------------------------------
+    // Hilfsfunktionen für Hervorhebung
+    // ------------------------------
     const clearHighlight = (field) => setHighlight((prev) => ({ ...prev, [field]: false }));
 
     const validateFields = () => {
@@ -100,7 +104,6 @@ function AddMealPage() {
         setPreview(null);
         setCategoryId("");
         setAreaId("");
-
         setHighlight({
             name: false,
             instructions: false,
@@ -110,9 +113,9 @@ function AddMealPage() {
         });
     };
 
-    // -------------------------
-    // Submit form
-    // -------------------------
+    // ------------------------------
+    // Formular absenden
+    // ------------------------------
     const handleSubmit = async () => {
         const validation = validateFields();
 
@@ -139,25 +142,26 @@ function AddMealPage() {
 
             const text = await res.text();
             try {
-                JSON.parse(text);
+                JSON.parse(text); // Prüfen, ob Backend gültiges JSON zurückliefert
             } catch {
-                console.log("Invalid JSON from backend:", text);
+                console.log("Ungültiges JSON vom Backend:", text);
                 return;
             }
 
             setShowSuccessModal(true);
             clearForm();
 
-            // -------------------------
-            // Редирект на MyRecipesPage
-            // -------------------------
+            // Redirect zur MyRecipes-Seite
             navigate("/my-recipes");
         } catch (err) {
-            console.error("Error sending form:", err);
+            console.error("Fehler beim Senden des Formulars:", err);
             setShowErrorModal(true);
         }
     };
 
+    // ------------------------------
+    // Update der Feld-Hervorhebungen nach Modal-Schließen
+    // ------------------------------
     useEffect(() => {
         if (!showErrorModal && pendingValidation) {
             setHighlight(pendingValidation);
@@ -165,9 +169,9 @@ function AddMealPage() {
         }
     }, [showErrorModal]);
 
-    // -------------------------
-    // JSX
-    // -------------------------
+    // ------------------------------
+    // JSX / Render
+    // ------------------------------
     return (
         <Container className="my-4 meal-page">
             {/* Error Modal */}
@@ -208,6 +212,7 @@ function AddMealPage() {
                 </Modal.Footer>
             </Modal>
 
+            {/* Meal Image + Upload */}
             <Row className="mb-4 g-0">
                 <Col md={7}>
                     <div className="meal-image-box">
@@ -231,6 +236,7 @@ function AddMealPage() {
                     </div>
                 </Col>
 
+                {/* Meal Name + Kategorie + Land */}
                 <Col md={5}>
                     <div className="meal-title-box p-3">
                         <Form.Control
@@ -279,6 +285,7 @@ function AddMealPage() {
                 </Col>
             </Row>
 
+            {/* Instructions + Ingredients */}
             <Row>
                 <Col md={6}>
                     <div className="meal-instructions card p-3 mb-4 mb-md-0">

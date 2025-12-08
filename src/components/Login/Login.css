@@ -1,22 +1,36 @@
+/* =============================================
+   Allgemeiner Content-Wrapper
+   ---------------------------------------------
+   Höhe auf 90vh gesetzt, zentriert, leichte Verkleinerung
+   ============================================= */
 .content-box {
   height: 90vh;
-  margin: 0 auto;
-  /*center*/
-  border: 1px solid black;
-  zoom: 0.9;
+  margin: 0 auto;             /* zentriert horizontal */
+  border: 1px solid black;    /* Rahmen für visuelles Debugging */
+  zoom: 0.9;                  /* globale Skalierung */
 }
 
+/* =============================================
+   Login-Formular Inhalte
+   ---------------------------------------------
+   Padding links/rechts, eigene Schriftart
+   ============================================= */
 .login-content {
   padding-left: 150px;
   padding-right: 150px;
   font-family: "Happy Monkey", sans-serif !important;
 }
 
+/* Abstand zwischen allen Kind-Elementen */
 .login-content > * {
   margin-top: 20px;
 }
 
-
+/* =============================================
+   Bild rechts im Layout
+   ---------------------------------------------
+   Höhe auf 100vh, Bild skaliert das Container-Verhältnis
+   ============================================= */
 .right-pic {
   height: 100vh;
   overflow: hidden;
@@ -24,13 +38,16 @@
 }
 
 .right-pic > img {
-  /* 100 from parent */
   height: 100%;
   width: 100%;
-  object-fit: fill;
+  object-fit: fill; /* Bild füllt Container komplett */
 }
 
-
+/* =============================================
+   Unterstrichene Input-Felder
+   ---------------------------------------------
+   Minimalistisches Design ohne Rahmen
+   ============================================= */
 .underline-input {
   border: none !important;
   border-bottom: 1px solid #413939 !important;
@@ -39,29 +56,34 @@
   padding-left: 0;
 }
 
-/* placeholder turn transparent when the cursor is in the input field  */
-.underline-input:focus::placeholder{
+/* Placeholder verschwindet beim Fokussieren */
+.underline-input:focus::placeholder {
   color: transparent;
 }
 
-
-
+/* =============================================
+   Buttons
+   -------------------------------------------- */
 .login-button {
   background-color: #d2691e;
 }
 
 .login-button:hover {
-  background-color: #e2c1c1;
+  background-color: #e2c1c1; /* sanfte Hover-Farbe */
 }
 
 .register-button {
-  margin: top 2px;
+  margin-top: 2px;
 }
 
+/* Google Icon */
 .google-icon {
   color: #d2691e;
 }
 
+/* =============================================
+   Responsive Anpassungen
+   -------------------------------------------- */
 @media (max-width: 1200px) {
   .content-box {
     transform: scale(0.9);
@@ -70,34 +92,39 @@
 }
 
 @media (max-width: 992px) {
+  /* Bild rechts ausblenden */
   .right-pic {
     display: none;
   }
 
+  /* Volle Breite für die Spalte */
   .col-6 {
     flex: 0 0 100%;
     max-width: 100%;
   }
 
-   .login-content{
-    padding: 2px;
+  .login-content {
+    padding: 2px; /* kleine Abstände auf kleineren Bildschirmen */
   }
 
   .content-box {
-   margin: 9% !important;
-   padding: 2%;
-  height: 700px;
+    margin: 9% !important;
+    padding: 2%;
+    height: 700px;
   }
 }
 
-/* Register */
+/* =============================================
+   Register Checkbox
+   ---------------------------------------------
+   Größe, Akzentfarbe und Textstil
+   ============================================= */
 .check input[type="checkbox"] {
   width: 20px;
   height: 20px;
-  accent-color: green;
-  /* checked status */
+  accent-color: green; /* Farbe bei aktiviertem Status */
 }
 
 .check span {
-  font-size: small;
+  font-size: small; /* beschriftung der checkbox */
 }

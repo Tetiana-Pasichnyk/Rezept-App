@@ -5,7 +5,9 @@ import "../Register/Register.css";
 import { useState } from "react";
 
 function Register() {
-    // --------------- Alona`s code
+    // -------------------------------
+    // State für Formularfelder
+    // -------------------------------
     const [form, setForm] = useState({
         first_name: "",
         last_name: "",
@@ -15,26 +17,34 @@ function Register() {
         password2: "",
     });
 
+    // State für Feedback-Messages (Validierung / Serverantwort)
     const [message, setMessage] = useState("");
 
+    // -------------------------------
+    // Allgemeine Handler-Funktion für Input-Änderungen
+    // -------------------------------
     const handleChange = (e) => {
         const { name, value } = e.target;
 
-        //  phone number
+        // Nur Zahlen für Telefonnummer zulassen
         const sanitizedValue = name === "phone_number" ? value.replace(/\D/g, "") : value;
 
+        // Form-State aktualisieren
         setForm({ ...form, [name]: sanitizedValue });
 
-        // Log only non-sensitive fields
+        // Logging nur für nicht-sensible Felder
         if (name !== "password" && name !== "password2") {
             console.log(`${name} changed:`, sanitizedValue);
         }
     };
 
+    // -------------------------------
+    // Formular-Submit Handler
+    // -------------------------------
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Frontend validation
+        // --- Frontend-Validierung ---
         if (!form.first_name || !form.last_name || !form.email || !form.password) {
             setMessage("Please fill in all required fields.");
             return;
@@ -56,6 +66,7 @@ function Register() {
             return;
         }
 
+        // --- Backend Request ---
         try {
             const res = await fetch("http://localhost:8888/rezept-plattform/backend/registration.php", {
                 method: "POST",
@@ -67,6 +78,7 @@ function Register() {
             setMessage(data.message);
 
             if (data.status === "success") {
+                // Formular zurücksetzen
                 setForm({
                     first_name: "",
                     last_name: "",
@@ -75,7 +87,8 @@ function Register() {
                     password: "",
                     password2: "",
                 });
-                // Redirect to home after successful registration
+
+                // Redirect nach erfolgreicher Registrierung
                 setTimeout(() => {
                     window.location.href = "/";
                 }, 2000);
@@ -86,18 +99,28 @@ function Register() {
         }
     };
 
-    // -------------
-
+    // -------------------------------
+    // JSX: Layout der Registrierungsseite
+    // -------------------------------
     return (
         <div className="row">
+            {/* -------------------------------
+                Linke Seite: Formular
+                ------------------------------- */}
             <div className="col-6 p-0 left-wrapper">
                 <div className="mx-5 my-4 content-box">
                     <div className="d-flex flex-column register-content">
+                        {/* Logo + Home Link */}
                         <a href="/" className="d-flex flex-row text-decoration-none" style={{ color: "black" }}>
                             <i className="bi bi-house-door" style={{ fontSize: 30, color: "#d2691e" }}></i>
                             <h1 className="text-nowrap">&nbsp; Super Recipe </h1>
                         </a>
+
                         <h4>User Information</h4>
+
+                        {/* -------------------------------
+                            Formularfelder
+                        ------------------------------- */}
                         <form id="register-form" onSubmit={handleSubmit}>
                             <input
                                 className="form-control underline-input"
@@ -107,7 +130,7 @@ function Register() {
                                 name="email"
                                 value={form.email}
                                 onChange={handleChange}
-                            ></input>
+                            />
                             <input
                                 className="form-control underline-input"
                                 type="password"
@@ -116,7 +139,7 @@ function Register() {
                                 name="password"
                                 value={form.password}
                                 onChange={handleChange}
-                            ></input>
+                            />
                             <input
                                 className="form-control underline-input"
                                 type="password"
@@ -125,7 +148,7 @@ function Register() {
                                 name="password2"
                                 value={form.password2}
                                 onChange={handleChange}
-                            ></input>
+                            />
                             <input
                                 className="form-control underline-input"
                                 type="text"
@@ -134,7 +157,7 @@ function Register() {
                                 name="first_name"
                                 value={form.first_name}
                                 onChange={handleChange}
-                            ></input>
+                            />
                             <input
                                 className="form-control underline-input"
                                 type="text"
@@ -143,8 +166,12 @@ function Register() {
                                 name="last_name"
                                 value={form.last_name}
                                 onChange={handleChange}
-                            ></input>
+                            />
                         </form>
+
+                        {/* -------------------------------
+                            Telefonnummer + Area Code
+                        ------------------------------- */}
                         <div className="d-flex flex-row gap-5 mt-0" id="last-input">
                             <div className="flex-grow-0" style={{ width: "100px" }}>
                                 <label className="form-label">AREA CODE</label>
@@ -154,7 +181,7 @@ function Register() {
                                     value="+49"
                                     readOnly
                                     aria-label="AREA CODE"
-                                ></input>
+                                />
                             </div>
                             <div className="flex-grow-1">
                                 <label className="form-label">* MOBILE NUMBER</label>
@@ -165,10 +192,15 @@ function Register() {
                                     name="phone_number"
                                     value={form.phone_number}
                                     onChange={handleChange}
-                                ></input>
+                                />
                             </div>
                         </div>
+
                         <p className="my-2">We will send you an SMS to verify your mobile number</p>
+
+                        {/* -------------------------------
+                            Checkboxen für Marketing & Datenschutz
+                        ------------------------------- */}
                         <div className="check">
                             <label>
                                 <input type="checkbox" />
@@ -184,14 +216,22 @@ function Register() {
                                 <span>I have read and understood the Privacy and Cookie Policy.</span>
                             </label>
                         </div>
-                        <button type="submit" form="register-form" className="btn mt-5 btn-outline-dark ">
+
+                        {/* -------------------------------
+                            Buttons: Register / Login
+                        ------------------------------- */}
+                        <button type="submit" form="register-form" className="btn mt-5 btn-outline-dark">
                             REGISTER
                         </button>
-                        <a role="button" href="/login" className="btn  mt-2 mb-5 login-button ">
+                        <a role="button" href="/login" className="btn mt-2 mb-5 login-button">
                             LOG IN
                         </a>
                     </div>
                 </div>
+
+                {/* -------------------------------
+                    Alert Message (Feedback)
+                ------------------------------- */}
                 {message && (
                     <div className="custom-alert" role="alert">
                         {message}
@@ -204,9 +244,11 @@ function Register() {
                 )}
             </div>
 
-            {/* Right part of the page */}
-            <div className="col-6 right-pic ">
-                <img src="images/cake-klein.png" alt="spices" className="img-fluid" />
+            {/* -------------------------------
+                Rechte Seite: Bild
+                ------------------------------- */}
+            <div className="col-6 right-pic">
+                <img src="images/cake-klein.png" alt="cake" className="img-fluid" />
             </div>
         </div>
     );

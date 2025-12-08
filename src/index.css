@@ -1,4 +1,10 @@
+/* ------------------------------
+   Globale Schriftart für die gesamte App
+   --------------------------------------
+   * Selektor: wendet die Schriftart auf alle Elemente an
+   * !important: stellt sicher, dass die Schriftart alle anderen Stildefinitionen überschreibt
+   * "Happy Monkey" als Hauptschriftart, Fallback: sans-serif
+------------------------------ */
 * {
     font-family: "Happy Monkey", sans-serif !important;
- 
 }

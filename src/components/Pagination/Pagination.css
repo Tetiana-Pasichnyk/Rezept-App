@@ -1,18 +1,37 @@
+/* =============================================
+   PAGINATION-BUTTONS – Styling für Seiten-Navigation
+   ============================================= */
+
+/* Grundstil der Buttons */
 .pagination-btn {
-    background: white;
-    border: 1px solid black;
-    padding: 5px 14px;
-    border-radius: 20px;
-    cursor: pointer;
+    background: white; /* Hintergrundfarbe */
+    border: 1px solid black; /* Rahmen */
+    padding: 5px 14px; /* Innenabstand für bessere Klickfläche */
+    border-radius: 20px; /* abgerundete Ecken für modernes Design */
+    cursor: pointer; /* Mauszeiger zeigt Klickbarkeit an */
+    transition: background 0.2s, transform 0.2s; /* sanfte Übergänge bei Hover */
 }
 
-/* Disabled-State: optische Abschwächung und deaktivierter Cursor */
+/* Hover-Zustand: leichte visuelle Rückmeldung */
+.pagination-btn:hover:not(:disabled) {
+    background: #f0f0f0;
+    transform: scale(1.05);
+}
+
+/* Disabled-State:
+   - optische Abschwächung
+   - Cursor zeigt deaktiviert
+   - verhindert Interaktion
+*/
 .pagination-btn:disabled {
     opacity: 0.4;
     cursor: not-allowed;
 }
 
-/* Textdarstellung der Seitenangabe */
+/* Textdarstellung der aktuellen Seitenanzeige */
 .pagination-text {
-    font-size: 18px;
+    font-size: 18px; /* gut lesbare Größe */
+    font-weight: 500; /* mittlere Schriftstärke für bessere Sichtbarkeit */
+    margin: 0 8px; /* Abstand zu Buttons */
+    display: inline-block; /* Inline-Darstellung neben Buttons */
 }

@@ -2,62 +2,78 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./Footer.css";
+import { footerConfig } from "../../config/TextPagesConfig";
 
+/**
+ * Footer-Komponente
+ * --------------------------------------------------------------
+ * Dynamischer Footer, der Inhalte aus einer zentralen Konfigurationsdatei
+ * lädt. Ermöglicht einfache Anpassung von Kontaktdaten, Links und "Über uns"-Text.
+ *
+ * Struktur:
+ * - Horizontale Trennlinie
+ * - Zwei Spalten (Bootstrap Grid):
+ *   1. Kontaktinformationen & Links
+ *   2. Über uns + Bild
+ *
+ * Vorteile:
+ * - Inhalte können in footerConfig zentral gepflegt werden
+ * - Reaktionsfähiges Layout via Bootstrap
+ * --------------------------------------------------------------
+ */
 function Footer() {
-  return (
-    <div>
-      <hr className="border border-2 opacity-50 border-color"></hr>
-      <div className="row  g-3 footer mb-5">
-        {/* footer left */}
-        <div className="col-sm-6 mb-3 mb-sm-0 p-0">
-          <div className="card">
-            <div className="card-body p-0">
-              <h5 className="card-title text-decoration-underline mb-2">
-                CONTACT:
-              </h5>
-              <p className="card-text">+49 171 333 3333</p>
-              <p>
-                Our customer service is available Mon–Sat : <br /> 7 a.m.–11
-                p.m.
-                <br />
-                 (except on public holidays)
-              </p>
+    // Destructuring der Footer-Konfiguration
+    const { contact, links, about } = footerConfig;
 
-              <a href="http://localhost:3000/impressum" className="btn ">
-                Impressum
-              </a>
-              <a href="http://localhost:3000/data-protection" className="btn ">
-                Data Protection
-              </a>
-            </div>
-          </div>
-        </div>
+    return (
+        <div>
+            {/* Horizontale Trennlinie */}
+            <hr className="border border-2 opacity-50 border-color" />
 
-        {/* footer right */}
-        <div className="col-sm-6">
-          <div className="row g-5">
-            <div className="col-md-4 footer-img-frame">
-              <img src="/images/our-team.png" className="img-fluid" alt="..." />
+            {/* Footer-Container mit Bootstrap Grid */}
+            <div className="row g-3 footer mb-5">
+                {/* -----------------------
+                    Linke Spalte: Kontakt & Links
+                   ----------------------- */}
+                <div className="col-sm-6 mb-3 mb-sm-0 p-0">
+                    <div className="card">
+                        <div className="card-body p-0">
+                            <h5 className="card-title text-decoration-underline mb-2">CONTACT:</h5>
+                            <p className="card-text">{contact.phone}</p>
+                            <p>{contact.workingHours}</p>
+
+                            {/* Dynamische Links aus der Konfiguration */}
+                            {links.map((link) => (
+                                <a key={link.label} href={link.url} className="btn">
+                                    {link.label}
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* -----------------------
+                    Rechte Spalte: Über uns
+                   ----------------------- */}
+                <div className="col-sm-6">
+                    <div className="row g-5">
+                        {/* Team-Bild */}
+                        <div className="col-md-4 footer-img-frame">
+                            <img src={about.image} className="img-fluid" alt="Team" />
+                        </div>
+
+                        {/* Text über das Team */}
+                        <div className="col-md-8">
+                            <div className="card-body">
+                                <h5 className="card-title mb-2 text-decoration-underline">{about.title}</h5>
+                                <p className="card-text">{about.text}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="col-md-8">
-              <div className="card-body">
-                <h5 className="card-title mb-2 text-decoration-underline">
-                  ABOUT US:
-                </h5>
-                <p className="card-text">
-                  We are a team dedicated to modern web and app development. Our
-                  focus is on clear design, high user-friendliness, and
-                  efficient workflows. With creativity and a methodical
-                  approach, we create solutions that foster international
-                  collaboration and deliver sustainable results.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default Footer;

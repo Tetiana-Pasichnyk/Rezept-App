@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+ import { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { Navbar, Nav, Container, Form } from "react-bootstrap";
@@ -7,14 +7,18 @@ import "./NavBar.css";
 import { useState } from "react";
 
 /**
- * @component NavBar
+ * NavBar-Komponente
+ * --------------------------------------------------------------
  * Hauptnavigationsleiste der App.
+ *
  * Verantwortlich für:
  * - Anzeige des App-Logos
  * - Suchfeld für Mahlzeiten
- * - Navigation (Home, New Recipe, Log-in)
+ * - Navigation (Home, Favorites, My Recipes, Add Meal, Login/Logout)
  * - Responsive Verhalten über Bootstrap
  * - Automatischer Reset des Suchfeldes beim Seitenwechsel oder bei Kategoriewechsel
+ * - Login-Statusprüfung via Backend
+ * --------------------------------------------------------------
  */
 function NavBar() {
     const navigate = useNavigate();
@@ -22,28 +26,33 @@ function NavBar() {
     const { searchTerm, setSearchTerm } = useContext(SearchContext);
 
     // -------------------------
-    // Navigation zu AddMeal-Seite
+    // Navigation zur AddMeal-Seite
     // -------------------------
     const goToAddMeal = () => navigate("/add-meal");
 
     // -------------------------
     // Automatischer Reset des Suchfeldes beim Seitenwechsel
+    // useEffect reagiert auf Pfadänderungen
     // -------------------------
     useEffect(() => {
         setSearchTerm("");
     }, [location.pathname, setSearchTerm]);
 
     // -------------------------
-    // Funktion für Reset beim Kategoriewechsel
-    // Kann an CategoryButton weitergegeben werden
+    // Funktion zum Reset beim Kategoriewechsel
+    // Kann an CategoryButton-Komponente weitergegeben werden
     // -------------------------
     const resetSearch = () => setSearchTerm("");
 
+    // -------------------------
+    // Lokaler State für Login-Status
+    // -------------------------
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    //get login status
+    // -------------------------
+    // Backend-Abfrage für Login-Status beim Initial-Render
+    // -------------------------
     useEffect(() => {
-        // first redend with backend to check login status
         fetch("http://localhost:8888/rezept-plattform/backend/check-login.php", {
             credentials: "include", // send PHPSESSID cookie
         })
@@ -52,11 +61,13 @@ function NavBar() {
             .catch((err) => console.error("Failed to check login:", err));
     }, []);
 
-    //remove localStorage key
+    // -------------------------
+    // Logout-Funktion
+    // Backend-Aufruf und Redirect auf Startseite
+    // -------------------------
     const handleLogout = () => {
         fetch("http://localhost:8888/rezept-plattform/backend/logout.php", {
             credentials: "include",
-            // ";
         })
             .then(() => {
                 setIsLoggedIn(false);
@@ -68,12 +79,18 @@ function NavBar() {
     return (
         <Navbar expand="lg" bg="light" className="px-3 shadow-sm">
             <Container fluid className="navbar-container d-flex align-items-center justify-content-between">
-                {/* Logo und Branding */}
+                {/* ------------------------------
+                    Logo und Branding
+                    ------------------------------ */}
                 <Navbar.Brand className="navbar-logo fw-bold">
                     <i className="bi bi-book" /> Great Recipe
                 </Navbar.Brand>
 
-                {/* Suchfeld */}
+                {/* ------------------------------
+                    Suchfeld für Mahlzeiten
+                    - Icon überlagert Inputfeld
+                    - State gesteuert über Context
+                ------------------------------ */}
                 <div className="search-wrapper">
                     <Form>
                         <div className="position-relative">
@@ -97,14 +114,19 @@ function NavBar() {
                     </Form>
                 </div>
 
-                {/* Hamburger Menü für mobile Ansicht */}
+                {/* ------------------------------
+                    Hamburger Menü für mobile Ansicht
+                    ------------------------------ */}
                 <Navbar.Toggle aria-controls="main-nav" />
+
+                {/* ------------------------------
+                    Navigationslinks abhängig vom Login-Status
+                    ------------------------------ */}
                 {!isLoggedIn ? (
                     <Navbar.Collapse id="main-nav" className="justify-content-center">
                         <Nav className="text-center">
                             <Nav.Link href="/">Home</Nav.Link>
                             <Nav.Link href="/favorites">My favorites</Nav.Link>
-
                             <Nav.Link href="/login">Log-in</Nav.Link>
                             <Nav.Link href="/register">Register</Nav.Link>
                         </Nav>

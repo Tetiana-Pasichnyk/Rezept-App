@@ -5,10 +5,14 @@ import MealCard from "../components/MealCard/MealCard";
 import Pagination from "../components/Pagination/Pagination";
 import Banner from "../components/Banner/Banner";
 
+// ------------------------------
+// FavoritesPage-Komponente
+// Zeigt alle Favoriten des Nutzers mit Such- und Pagination-Funktionalität
+// ------------------------------
 function FavoritesPage() {
     // ------------------------------
     // Zugriff auf globale Contexts
-    // SearchContext: enthält Suchbegriff
+    // SearchContext: enthält den aktuellen Suchbegriff
     // FavoritesContext: enthält Favoritenliste und Toggle-Funktion
     // ------------------------------
     const { searchTerm } = useContext(SearchContext);
@@ -18,19 +22,19 @@ function FavoritesPage() {
     // Lokaler State für Pagination
     // ------------------------------
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 9; // Anzahl der angezeigten Elemente pro Seite
+    const itemsPerPage = 9; // Anzahl der Elemente pro Seite
 
     // ------------------------------
-    // Filterung der Favoriten nach Suchbegriff
+    // Filtern der Favoriten basierend auf dem Suchbegriff
     // Groß-/Kleinschreibung wird ignoriert
     // ------------------------------
     const filteredMeals = favorites.filter(
-        (meal) => meal.name?.toLowerCase().includes(searchTerm.toLowerCase()) // ?. безопасная проверка
+        (meal) => meal.name?.toLowerCase().includes(searchTerm.toLowerCase()) // ?. für sichere Prüfung
     );
 
     // ------------------------------
     // Pagination-Logik
-    // Berechnung der Start- und Endindizes für das aktuelle Seiten-Array
+    // Berechnung der Start- und Endindizes für die aktuelle Seite
     // ------------------------------
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -38,12 +42,13 @@ function FavoritesPage() {
     const totalPages = Math.ceil(filteredMeals.length / itemsPerPage);
 
     // ------------------------------
-    // Rendern der UI
+    // JSX / Render
     // Banner, MealCards, Pagination
     // ------------------------------
     return (
         <div>
             <div className="container mt-4">
+                {/* Banner-Komponente */}
                 <Banner lines={["Your", "favorite", "recipes"]} />
 
                 <div className="row g-4 mt-4">
@@ -54,19 +59,19 @@ function FavoritesPage() {
                         </p>
                     )}
 
-                    {/* Darstellung der aktuellen Seite mit MealCards */}
+                    {/* Anzeige der aktuellen Seite mit MealCards */}
                     {currentMeals.map((meal) => (
                         <div key={meal.id} className="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
                             <MealCard
                                 meal={meal}
-                                isFavorite={true} // Favoritenstatus wird immer true sein
-                                toggleFavorite={toggleFavorite}
+                                isFavorite={true} // Favoritenstatus ist immer true
+                                toggleFavorite={toggleFavorite} // Favoriten-Toggle-Funktion
                             />
                         </div>
                     ))}
                 </div>
 
-                {/* Pagination-Komponente nur anzeigen, wenn Elemente vorhanden */}
+                {/* Pagination nur anzeigen, wenn Elemente vorhanden */}
                 {currentMeals.length > 0 && (
                     <Pagination
                         currentPage={currentPage}

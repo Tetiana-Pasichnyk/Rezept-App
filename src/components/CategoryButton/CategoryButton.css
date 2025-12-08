@@ -1,22 +1,25 @@
 /* =============================================
    KATEGORIEN-SLIDER – horizontale Scrollliste
+   -------------------------------------------------
+   Anzeige der Kategorien in einer horizontal scrollbaren Leiste
+   für schnelle Navigation zwischen Kategorie-Pills.
    ============================================= */
 .category-container {
-    max-width: 50vw; /* auf die halbe Bildschirmbreite begrenzt */
-    margin: 0 auto;
+    max-width: 50vw; /* Container auf halbe Bildschirmbreite begrenzt */
+    margin: 0 auto; /* zentriert horizontal */
 }
 
 .category-scroll {
-    display: flex;
-    gap: 10px; /* Abstand zwischen Buttons */
-    overflow-x: auto; /* horizontales Scrollen */
-    scroll-behavior: smooth; /* weiches Scrollen */
-    -webkit-overflow-scrolling: touch; /* besseres Scrollen auf iOS */
+    display: flex; /* horizontale Anordnung der Buttons */
+    gap: 10px; /* Abstand zwischen einzelnen Kategorie-Pills */
+    overflow-x: auto; /* horizontales Scrollen erlauben */
+    scroll-behavior: smooth; /* sanftes Scrollen bei Navigation */
+    -webkit-overflow-scrolling: touch; /* optimiertes Scrollen auf iOS */
     padding-bottom: 12px;
     margin-bottom: 20px !important;
 }
 
-/* Einzelner Kategorie-Button */
+/* Einzelner Kategorie-Pill */
 .category-pill {
     flex: 0 0 auto; /* verhindert Zusammenquetschen */
     width: calc(50vw / 7); /* proportional zur Containerbreite */
@@ -27,63 +30,66 @@
     justify-content: center; /* horizontale Zentrierung */
     padding: 0 8px;
     margin-bottom: 12px;
-    border-radius: 90px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    border-radius: 90px; /* runde Pill-Form */
+    transition: transform 0.2s, box-shadow 0.2s; /* weiche Animation bei Hover/Aktiv */
 }
 
+/* Aktiver Kategorie-Pill */
 .category-pill.active {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* слегка «выпуклый» эффект */
-    transform: scale(1.05); /* чуть увеличена */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* leichter „Hover/Pressed“-Effekt */
+    transform: scale(1.05); /* leichte Vergrößerung */
 }
-/* ============================
-   MOBILE ADAPTATION
-   ============================ */
+
+/* =============================================
+   MOBILE ADAPTATION (<480px)
+   --------------------------------------------- */
 @media (max-width: 480px) {
     .category-container {
-        max-width: 100vw !important;
+        max-width: 100vw !important; /* volle Breite */
         padding-left: 0;
         padding-right: 0;
     }
 
     .category-scroll {
-        gap: 6px !important;           /* чуть меньше расстояние */
+        gap: 6px !important; /* etwas enger */
         padding-bottom: 6px;
         overflow-x: auto;
     }
 
     .category-pill {
-        flex: 0 0 30% ;       /* чуть меньше, чтобы поместились 3 кнопки */
+        flex: 0 0 30%; /* ca. 3 Pills pro Bildschirm */
         box-sizing: border-box;
-        height: 30px;        /* меньше высота */
-        font-size: 0.rem !important;  /* компактный текст */
+        height: 30px;
+        font-size: 0.7rem !important; /* kompakter Text */
         padding: 0 6px;
-        border-radius: 40px; /* чуть более округлые */
+        border-radius: 40px; /* etwas rundere Form */
         white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis;
+        text-overflow: ellipsis; /* abgeschnittener Text mit ... */
     }
 }
+
 /* =============================================
    TABLET ADAPTATION (481px - 768px)
-   ============================================= */
+   --------------------------------------------- */
 @media (min-width: 481px) and (max-width: 768px) {
     .category-container {
-        max-width: 90vw; /* чуть шире, чем на мобилке */
+        max-width: 90vw; /* leicht breiter als Mobil */
         padding-left: 0;
         padding-right: 0;
     }
 
     .category-scroll {
-        gap: 8px;          /* чуть больше расстояние между кнопками */
+        gap: 8px; /* moderater Abstand */
         padding-bottom: 8px;
         overflow-x: auto;
     }
 
     .category-pill {
-        flex: 0 0 22%;      /* примерно 4 кнопки на экран */
+        flex: 0 0 22%; /* ca. 4 Pills pro Bildschirm */
         box-sizing: border-box;
-        height: 34px;       /* чуть выше, чем на мобилке */
-        font-size: 0.8rem;  /* чуть больше текст */
+        height: 34px;
+        font-size: 0.8rem;
         padding: 0 8px;
         border-radius: 45px;
         white-space: nowrap;
@@ -94,25 +100,25 @@
 
 /* =============================================
    MEDIUM SCREENS (769px - 1024px)
-   ============================================= */
+   --------------------------------------------- */
 @media (min-width: 769px) and (max-width: 1024px) {
     .category-container {
-        max-width: 50vw;   /* аналогично десктопу */
+        max-width: 50vw; /* wie Desktop */
         padding-left: 0;
         padding-right: 0;
     }
 
     .category-scroll {
-        gap: 9px;          /* промежуточный gap */
+        gap: 9px; /* mittlerer Abstand */
         padding-bottom: 10px;
         overflow-x: auto;
     }
 
     .category-pill {
-        flex: 0 0 14%;      /* примерно 7 кнопок на экран */
+        flex: 0 0 14%; /* ca. 7 Pills pro Bildschirm */
         box-sizing: border-box;
-        height: 38px;       /* чуть меньше десктопной */
-        font-size: 0.85rem; /* чуть меньше десктопной */
+        height: 38px;
+        font-size: 0.85rem;
         padding: 0 10px;
         border-radius: 50px;
         white-space: nowrap;

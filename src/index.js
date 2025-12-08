@@ -2,13 +2,30 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+
+// ------------------------------
+// Bootstrap CSS & JS importieren
+// CSS für Grundstyles, JS für interaktive Komponenten (Modal, Dropdown, etc.)
+// ------------------------------
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
+// React Router import für Routing
 import { BrowserRouter } from "react-router-dom";
 
+// Globale CSS-Datei
 import "./index.css";
+
+// ------------------------------
+// React Root erstellen
+// ------------------------------
 const root = ReactDOM.createRoot(document.getElementById("root"));
-// --------------add <BrowserRouter>
+
+// ------------------------------
+// App rendern
+// - <React.StrictMode> für Entwicklungswarnungen und zukünftige Fehlererkennung
+// - <BrowserRouter> für Client-Side-Routing
+// ------------------------------
 root.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -17,7 +34,8 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+// ------------------------------
+// Performance-Messung (optional)
+// Kann in Konsole geloggt oder an Analytics gesendet werden
+// ------------------------------
 reportWebVitals();

@@ -1,44 +1,48 @@
-
-
+/* =============================================
+   Footer-Grundlayout
+   ---------------------------------------------
+   Allgemeine Styles für den Footer-Bereich
+   ============================================= */
 .footer {
-    font-family: "Happy Monkey", sans-serif !important;
-    margin-left: 10%;
-     margin-right: 10%;
-    
+    font-family: "Happy Monkey", sans-serif !important; /* Spezifische Schriftart */
+    margin-left: 10%;   /* horizontale Abstände links/rechts */
+    margin-right: 10%;
 }
 
+/* Karten innerhalb des Footers ohne Rahmen */
 .footer .card {
-  border: none !important;
-    
+    border: none !important;
 }
 
-.footer a{
-   
-    margin-right: 3%;
- 
-    border: 2px solid #d2691e;
-   
-   
+/* Links im Footer */
+.footer a {
+    margin-right: 3%;          /* Abstand zwischen Links */
+    border: 2px solid #d2691e; /* Rahmenfarbe Orange/Braun */
 }
 
-
+/* Hover-Effekt für Links */
 .footer a:hover {
-    transform: scale(1.1);
-     background-color: #d2691e !important;
-     opacity: 1;
-    
+    transform: scale(1.1);            /* leichte Vergrößerung beim Hover */
+    background-color: #d2691e !important; /* Hintergrundfarbe beim Hover */
+    opacity: 1;                        /* volle Deckkraft */
 }
 
-.footer-img-frame > img{
-  width: 300px; 
-  height: 200px; 
-  overflow: hidden; /* hide when pic overflow*/
-  border-radius: 8px;
+/* Bilderrahmen im Footer */
+.footer-img-frame > img {
+    width: 300px; 
+    height: 200px; 
+    overflow: hidden;   /* Bildüberlauf verbergen */
+    border-radius: 8px; /* abgerundete Ecken */
 }
 
+/* =============================================
+   Mobile Anpassungen (<576px)
+   ---------------------------------------------
+   Entfernt Abstände zwischen Spalten für kleine Bildschirme
+   ============================================= */
 @media (max-width: 576px) {
-  .footer .row.g-5 {
-    --bs-gutter-x: 0;
-    --bs-gutter-y: 0;
-  }
+    .footer .row.g-5 {
+        --bs-gutter-x: 0;  /* horizontale Lücken entfernen */
+        --bs-gutter-y: 0;  /* vertikale Lücken entfernen */
+    }
 }
