@@ -114,8 +114,7 @@ function NavBar() {
                         <Nav className="text-center">
                             <Nav.Link href="/">Home</Nav.Link>
                             <Nav.Link href="/favorites">My favorites</Nav.Link>
-                            <Nav.Link onClick={goToAddMeal}>New recipe</Nav.Link>
-                            <Nav.Link onClick={goToAddMeal}>My recipe</Nav.Link>
+                            <Nav.Link href="/my-recipes">My Recipes</Nav.Link>
                             <Nav.Link onClick={goToAddMeal}>New recipe</Nav.Link>
                             <Nav.Link onClick={() => handleLogout()} href="/">
                                 Log-out

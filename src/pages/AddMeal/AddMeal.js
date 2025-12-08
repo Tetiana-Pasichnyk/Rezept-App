@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // <-- для редиректа
 import {
   Container,
   Row,
@@ -12,34 +13,25 @@ import { HiX } from "react-icons/hi";
 
 import "./AddMeal.css";
 
-/**
- * @component AddMealPage
- * Hauptkomponente zum Hinzufügen eines neuen Gerichts.
- * Verantwortlich für:
- * - Formularfelder (Name, Category, Area, Ingredients, Instructions)
- * - Bild-Upload & Vorschau
- * - Validierung und Anzeige von Fehlern/Erfolg
- * - Kommunikation mit dem Backend
- */
 function AddMealPage() {
+  const navigate = useNavigate(); // <-- получаем функцию navigate
+
   // -------------------------
   // Form state
   // -------------------------
-  const [name, setName] = useState(""); // Name of the meal
-  const [instructions, setInstructions] = useState(""); // Cooking instructions
-  const [ingredients, setIngredients] = useState([
-    { ingredient: "", measure: "" },
-  ]); // Ingredients list
-  const [thumbnail, setThumbnail] = useState(null); // Uploaded image file
-  const [preview, setPreview] = useState(null); // Image preview URL
+  const [name, setName] = useState("");
+  const [instructions, setInstructions] = useState("");
+  const [ingredients, setIngredients] = useState([{ ingredient: "", measure: "" }]);
+  const [thumbnail, setThumbnail] = useState(null);
+  const [preview, setPreview] = useState(null);
 
-  const [categories, setCategories] = useState([]); // Categories from backend
-  const [areas, setAreas] = useState([]); // Areas/Countries from backend
-  const [categoryId, setCategoryId] = useState(""); // Selected category
-  const [areaId, setAreaId] = useState(""); // Selected area
+  const [categories, setCategories] = useState([]);
+  const [areas, setAreas] = useState([]);
+  const [categoryId, setCategoryId] = useState("");
+  const [areaId, setAreaId] = useState("");
 
-  const [showErrorModal, setShowErrorModal] = useState(false); // Show error modal
-  const [showSuccessModal, setShowSuccessModal] = useState(false); // Show success modal
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const [highlight, setHighlight] = useState({
     name: false,
@@ -47,15 +39,15 @@ function AddMealPage() {
     categoryId: false,
     areaId: false,
     ingredients: false,
-  }); // Highlight fields with errors
+  });
 
-  const [pendingValidation, setPendingValidation] = useState(null); // Temporarily store validation results
+  const [pendingValidation, setPendingValidation] = useState(null);
 
   // -------------------------
-  // Load categories and areas from backend
+  // Load categories and areas
   // -------------------------
   useEffect(() => {
-    fetch("http://localhost/rezept/get-categories-areas.php")
+    fetch("http://localhost:8888/rezept-plattform/backend/get-categories-areas.php")
       .then((res) => res.json())
       .then((data) => {
         setCategories(data.categories || []);
@@ -65,7 +57,7 @@ function AddMealPage() {
   }, []);
 
   // -------------------------
-  // Handle ingredients changes
+  // Ingredients handlers
   // -------------------------
   const handleIngredientChange = (index, field, value) => {
     const newIngredients = [...ingredients];
@@ -74,17 +66,14 @@ function AddMealPage() {
     clearHighlight("ingredients");
   };
 
-  const addIngredient = () =>
-    setIngredients([...ingredients, { ingredient: "", measure: "" }]);
+  const addIngredient = () => setIngredients([...ingredients, { ingredient: "", measure: "" }]);
 
   const removeIngredient = (index) => {
-    if (ingredients.length > 1) {
-      setIngredients(ingredients.filter((_, i) => i !== index));
-    }
+    if (ingredients.length > 1) setIngredients(ingredients.filter((_, i) => i !== index));
   };
 
   // -------------------------
-  // Handle file upload and preview
+  // File upload
   // -------------------------
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -93,15 +82,10 @@ function AddMealPage() {
   };
 
   // -------------------------
-  // Clear field highlights
+  // Highlight helpers
   // -------------------------
-  const clearHighlight = (field) => {
-    setHighlight((prev) => ({ ...prev, [field]: false }));
-  };
+  const clearHighlight = (field) => setHighlight((prev) => ({ ...prev, [field]: false }));
 
-  // -------------------------
-  // Validate fields before submission
-  // -------------------------
   const validateFields = () => {
     const ingredientError = ingredients.some(
       (i) => i.ingredient.trim() === "" || i.measure.trim() === ""
@@ -137,7 +121,7 @@ function AddMealPage() {
   };
 
   // -------------------------
-  // Submit form to backend
+  // Submit form
   // -------------------------
   const handleSubmit = async () => {
     const validation = validateFields();
@@ -160,7 +144,7 @@ function AddMealPage() {
     );
 
     try {
-      const res = await fetch("http://localhost/rezept/add-meal.php", {
+      const res = await fetch("http://localhost:8888/rezept-plattform/backend/add-meal.php", {
         method: "POST",
         body: formData,
       });
@@ -175,15 +159,17 @@ function AddMealPage() {
 
       setShowSuccessModal(true);
       clearForm();
+
+      // -------------------------
+      // Редирект на MyRecipesPage
+      // -------------------------
+      navigate("/my-recipes"); 
     } catch (err) {
       console.error("Error sending form:", err);
       setShowErrorModal(true);
     }
   };
 
-  // -------------------------
-  // Update highlights after error modal is closed
-  // -------------------------
   useEffect(() => {
     if (!showErrorModal && pendingValidation) {
       setHighlight(pendingValidation);
@@ -191,49 +177,30 @@ function AddMealPage() {
     }
   }, [showErrorModal]);
 
+  // -------------------------
+  // JSX
+  // -------------------------
   return (
     <Container className="my-4 meal-page">
-      {/* Error modal */}
-      <Modal
-        show={showErrorModal}
-        onHide={() => setShowErrorModal(false)}
-        centered
-      >
+      {/* Error Modal */}
+      <Modal show={showErrorModal} onHide={() => setShowErrorModal(false)} centered>
         <Modal.Header closeButton style={{ backgroundColor: "#eddae0" }}>
           <Modal.Title>
-            <span style={{ marginRight: "0.5rem", fontSize: "1.5rem" }}>
-              ❌
-            </span>
+            <span style={{ marginRight: "0.5rem", fontSize: "1.5rem" }}>❌</span>
             Missing Required Fields
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          Please fill in all required fields before submitting.
-        </Modal.Body>
+        <Modal.Body>Please fill in all required fields before submitting.</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowErrorModal(false)}>
-            OK
-          </Button>
+          <Button variant="secondary" onClick={() => setShowErrorModal(false)}>OK</Button>
         </Modal.Footer>
       </Modal>
 
-      {/* Success modal */}
-      <Modal
-        show={showSuccessModal}
-        onHide={() => setShowSuccessModal(false)}
-        centered
-      >
+      {/* Success Modal */}
+      <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)} centered>
         <Modal.Header closeButton style={{ backgroundColor: "#d4edda" }}>
           <Modal.Title>
-            <span
-              style={{
-                marginRight: "0.5rem",
-                color: "#28a745",
-                fontSize: "1.5rem",
-              }}
-            >
-              ✔
-            </span>
+            <span style={{ marginRight: "0.5rem", color: "#28a745", fontSize: "1.5rem" }}>✔</span>
             Meal Saved
           </Modal.Title>
         </Modal.Header>
@@ -241,11 +208,7 @@ function AddMealPage() {
           Your meal has been successfully saved!
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            variant="success"
-            onClick={() => setShowSuccessModal(false)}
-            style={{ borderRadius: "40px", padding: "0.5rem 1.4rem" }}
-          >
+          <Button variant="success" onClick={() => setShowSuccessModal(false)} style={{ borderRadius: "40px", padding: "0.5rem 1.4rem" }}>
             OK
           </Button>
         </Modal.Footer>
@@ -254,20 +217,12 @@ function AddMealPage() {
       <Row className="mb-4 g-0">
         <Col md={7}>
           <div className="meal-image-box">
-            <input
-              type="file"
-              id="thumbnailInput"
-              onChange={handleFileChange}
-              style={{ display: "none" }}
-              accept="image/*"
-            />
+            <input type="file" id="thumbnailInput" onChange={handleFileChange} style={{ display: "none" }} accept="image/*" />
             {preview ? (
               <Image src={preview} alt="Preview" fluid className="meal-image" />
             ) : (
               <div className="upload-wrapper">
-                <label htmlFor="thumbnailInput" className="upload-label">
-                  +
-                </label>
+                <label htmlFor="thumbnailInput" className="upload-label">+</label>
                 <div className="upload-text">Upload Image</div>
               </div>
             )}
@@ -280,46 +235,29 @@ function AddMealPage() {
               type="text"
               placeholder="Meal Name"
               value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-                clearHighlight("name");
-              }}
-              className={`mb-2 text-center ${
-                highlight.name ? "required-highlight" : ""
-              }`}
+              onChange={(e) => { setName(e.target.value); clearHighlight("name"); }}
+              className={`mb-2 text-center ${highlight.name ? "required-highlight" : ""}`}
             />
 
             <Form.Select
               value={categoryId}
-              onChange={(e) => {
-                setCategoryId(e.target.value);
-                clearHighlight("categoryId");
-              }}
-              className={`mb-2 ${
-                highlight.categoryId ? "required-highlight" : ""
-              }`}
+              onChange={(e) => { setCategoryId(e.target.value); clearHighlight("categoryId"); }}
+              className={`mb-2 ${highlight.categoryId ? "required-highlight" : ""}`}
             >
               <option value="">Category</option>
               {categories.map((cat) => (
-                <option key={cat.id} value={cat.id}>
-                  {cat.name}
-                </option>
+                <option key={cat.id} value={cat.id}>{cat.name}</option>
               ))}
             </Form.Select>
 
             <Form.Select
               value={areaId}
-              onChange={(e) => {
-                setAreaId(e.target.value);
-                clearHighlight("areaId");
-              }}
+              onChange={(e) => { setAreaId(e.target.value); clearHighlight("areaId"); }}
               className={`mb-2 ${highlight.areaId ? "required-highlight" : ""}`}
             >
               <option value="">Country</option>
               {areas.map((area) => (
-                <option key={area.id} value={area.id}>
-                  {area.name}
-                </option>
+                <option key={area.id} value={area.id}>{area.name}</option>
               ))}
             </Form.Select>
           </div>
@@ -335,13 +273,8 @@ function AddMealPage() {
               rows={10}
               placeholder="Write the instructions here..."
               value={instructions}
-              onChange={(e) => {
-                setInstructions(e.target.value);
-                clearHighlight("instructions");
-              }}
-              className={`${
-                highlight.instructions ? "required-highlight" : ""
-              }`}
+              onChange={(e) => { setInstructions(e.target.value); clearHighlight("instructions"); }}
+              className={`${highlight.instructions ? "required-highlight" : ""}`}
             />
           </div>
         </Col>
@@ -349,60 +282,34 @@ function AddMealPage() {
         <Col md={6}>
           <div className="meal-ingredients card p-3 mb-4 mb-md-0">
             <h2 className="text-center mb-4">Ingredients</h2>
-
             {ingredients.map((item, index) => (
               <Row key={index} className="mb-2">
                 <Col>
                   <Form.Control
                     placeholder="Ingredient"
                     value={item.ingredient}
-                    onChange={(e) =>
-                      handleIngredientChange(
-                        index,
-                        "ingredient",
-                        e.target.value
-                      )
-                    }
-                    className={`${
-                      highlight.ingredients ? "required-highlight" : ""
-                    }`}
+                    onChange={(e) => handleIngredientChange(index, "ingredient", e.target.value)}
+                    className={`${highlight.ingredients ? "required-highlight" : ""}`}
                   />
                 </Col>
                 <Col>
                   <Form.Control
                     placeholder="Measure"
                     value={item.measure}
-                    onChange={(e) =>
-                      handleIngredientChange(index, "measure", e.target.value)
-                    }
-                    className={`${
-                      highlight.ingredients ? "required-highlight" : ""
-                    }`}
+                    onChange={(e) => handleIngredientChange(index, "measure", e.target.value)}
+                    className={`${highlight.ingredients ? "required-highlight" : ""}`}
                   />
                 </Col>
                 <Col xs="auto">
-                  <Button
-                    onClick={() => removeIngredient(index)}
-                    variant="danger"
-                    disabled={ingredients.length === 1}
-                  >
+                  <Button onClick={() => removeIngredient(index)} variant="danger" disabled={ingredients.length === 1}>
                     <HiX size={20} color="#fff" />
                   </Button>
                 </Col>
               </Row>
             ))}
 
-            <Button
-              variant="secondary"
-              onClick={addIngredient}
-              className="d-block mx-auto mb-5 mt-4 w-50"
-            >
-              Add Ingredient
-            </Button>
-
-            <Button onClick={handleSubmit} className="w-100 mt-4">
-              Save Meal
-            </Button>
+            <Button variant="secondary" onClick={addIngredient} className="d-block mx-auto mb-5 mt-4 w-50">Add Ingredient</Button>
+            <Button onClick={handleSubmit} className="w-100 mt-4">Save Meal</Button>
           </div>
         </Col>
       </Row>
