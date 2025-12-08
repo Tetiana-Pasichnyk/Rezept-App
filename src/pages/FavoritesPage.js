@@ -24,7 +24,9 @@ function FavoritesPage() {
     // Filterung der Favoriten nach Suchbegriff
     // Groß-/Kleinschreibung wird ignoriert
     // ------------------------------
-    const filteredMeals = favorites.filter((meal) => meal.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    const filteredMeals = favorites.filter(
+        (meal) => meal.name?.toLowerCase().includes(searchTerm.toLowerCase()) // ?. безопасная проверка
+    );
 
     // ------------------------------
     // Pagination-Logik

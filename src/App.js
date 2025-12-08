@@ -11,34 +11,34 @@ import Register from "./components/Register/Register";
 import Footer from "./components/Footer/Footer";
 import Impressum from "./components/Footer/Impressum";
 import Datenshutz from "./components/Footer/Datenshutz";
-
 import { AuthProvider } from "./context/AuthContext";
+import { FavoritesProvider } from "./context/FavoritesContext";
+import FavoritesPage from "./pages/FavoritesPage";
 
 function App() {
-  const location = useLocation();
-  const hideNav =
-    location.pathname.toLowerCase() === "/login" ||
-    location.pathname.toLowerCase() === "/register";
+    const location = useLocation();
+    const hideNav = location.pathname.toLowerCase() === "/login" || location.pathname.toLowerCase() === "/register";
 
-  return (
-    <AuthProvider>
-      <SearchProvider>
-        {/* ------move <BrowserRouter>  add <></> */}
-        {!hideNav && <NavBar />}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/meal/:id" element={<MealPage />} />
-          <Route path="/add-meal" element={<AddMeal />} />
-
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/impressum" element={<Impressum />} />
-          <Route path="/data-protection" element={<Datenshutz />} />
-        </Routes>
-        {!hideNav && <Footer />}
-      </SearchProvider>
-    </AuthProvider>
-  );
+    return (
+        <AuthProvider>
+            <SearchProvider>
+                <FavoritesProvider>
+                    {!hideNav && <NavBar />}
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/meal/:id" element={<MealPage />} />
+                        <Route path="/add-meal" element={<AddMeal />} />
+                        <Route path="/favorites" element={<FavoritesPage />} /> {/* ← добавляем */}
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/impressum" element={<Impressum />} />
+                        <Route path="/data-protection" element={<Datenshutz />} />
+                    </Routes>
+                    {!hideNav && <Footer />}
+                </FavoritesProvider>
+            </SearchProvider>
+        </AuthProvider>
+    );
 }
 
 export default App;
