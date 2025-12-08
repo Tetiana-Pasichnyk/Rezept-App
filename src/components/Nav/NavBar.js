@@ -44,7 +44,7 @@ function NavBar() {
   //get login status
   useEffect(() => {
     // first redend with backend to check login status
-    fetch("http://localhost/rezept/check-login.php", {
+    fetch("http://localhost:8888/rezept-plattform/backend/check-login.php", {
       credentials: "include", // send PHPSESSID cookie
     })
       .then((res) => res.json())
@@ -54,7 +54,7 @@ function NavBar() {
 
   //remove localStorage key
   const handleLogout = () => {
-    fetch("http://localhost/rezept/logout.php", {
+    fetch("http://localhost:8888/rezept-plattform/backend/logout.php", {
       credentials: "include",
       // ";
     })
