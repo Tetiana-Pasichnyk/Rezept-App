@@ -50,7 +50,11 @@ function MyRecipesPage() {
             <Banner lines={["Your", "personal", "recipes"]} />
 
             <div className="row g-4 mt-4">
-                {currentRecipes.length === 0 && <p>You haven't added any recipes yet!</p>}
+                {currentRecipes.length === 0 && (
+                    <p style={{ textAlign: "center", color: "#b65a18", fontSize: "1.2rem", marginTop: "2rem" }}>
+                        You have not added any recipes yet!
+                    </p>
+                )}
 
                 {currentRecipes.map((meal) => (
                     <div key={meal.id} className="col-12 col-sm-6 col-md-4 d-flex justify-content-center">

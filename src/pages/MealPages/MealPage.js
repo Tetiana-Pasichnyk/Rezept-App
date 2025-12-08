@@ -62,6 +62,11 @@ function MealPage() {
                         className="meal-image"
                     />
                 </Col>
+                <Col md={5}>
+                    <div className="meal-title-box">
+                        <h1 className="text-center">{meal.name}</h1>
+                    </div>
+                </Col>
             </Row>
 
             <Row>

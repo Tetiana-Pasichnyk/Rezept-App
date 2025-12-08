@@ -48,7 +48,11 @@ function FavoritesPage() {
 
                 <div className="row g-4 mt-4">
                     {/* Hinweis, falls keine Favoriten vorhanden sind */}
-                    {currentMeals.length === 0 && <p>No favorite meals yet!</p>}
+                    {currentMeals.length === 0 && (
+                        <p style={{ textAlign: "center", color: "#b65a18", fontSize: "1.2rem", marginTop: "2rem" }}>
+                            No favorite meals yet!
+                        </p>
+                    )}
 
                     {/* Darstellung der aktuellen Seite mit MealCards */}
                     {currentMeals.map((meal) => (
