@@ -1,35 +1,21 @@
 import { useContext, useEffect, useState } from "react";
 import { SearchContext } from "../context/SearchContext";
+import { FavoritesContext } from "../context/FavoritesContext"; // <-- импортируем
 import MealCard from "../components/MealCard/MealCard";
 import Pagination from "../components/Pagination/Pagination";
 import CategoryButton from "../components/CategoryButton/CategoryButton";
 import Banner from "../components/Banner/Banner";
-// import { FavoriteContext } from "../context/FavoriteContext";
-/**
- * @component Home
- * Hauptseite der App. Verantwortlich für:
- * - Anzeige von Mahlzeiten
- * - Kategorie-Filter
- * - Suche
- * - Favoritenverwaltung
- * - Pagination
- */
+
 function Home() {
-    // -------------------------
-    // Kontext & States
-    // -------------------------
-    const { searchTerm, setSearchTerm } = useContext(SearchContext); // Suchbegriff aus globalem Kontext
-    const [meals, setMeals] = useState([]); // Alle geladenen Mahlzeiten
-    const [categories, setCategories] = useState([]); // Kategorien vom Backend
-    const [favorites, setFavorites] = useState([]); // Favoritenliste
+    const { searchTerm, setSearchTerm } = useContext(SearchContext);
+    const { favorites, toggleFavorite } = useContext(FavoritesContext); // <-- используем глобальные фавориты
 
-    const [currentPage, setCurrentPage] = useState(1); // Aktuelle Pagination-Seite
-    const [selectedCategory, setSelectedCategory] = useState(null); // Ausgewählte Kategorie
-    const itemsPerPage = 9; // Anzahl der Items pro Seite
+    const [meals, setMeals] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const itemsPerPage = 9;
 
-    // -------------------------
-    // Mahlzeiten und Kategorien vom Backend laden
-    // -------------------------
     useEffect(() => {
         const url = selectedCategory
             ? `http://localhost:8888/rezept-plattform/backend/get-meals.php?category=${selectedCategory}`
@@ -38,44 +24,27 @@ function Home() {
         fetch(url)
             .then((res) => res.json())
             .then((data) => {
-                setCategories(data.categories); // Kategorien aktualisieren
-                setMeals(data.meals); // Mahlzeiten aktualisieren
-                setCurrentPage(1); // Pagination zurücksetzen
+                setCategories(data.categories);
+                setMeals(data.meals);
+                setCurrentPage(1);
             })
             .catch((err) => console.error("Error loading meals and categories:", err));
     }, [selectedCategory]);
 
-    // -------------------------
-    // Suche filtern
-    // -------------------------
     const filteredMeals = meals.filter((meal) => meal.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
-    // -------------------------
-    // Kategorie auswählen und Suchfeld zurücksetzen
-    // -------------------------
     const handleCategorySelect = (category) => {
         setSelectedCategory(category);
-        setSearchTerm(""); // Reset search term
+        setSearchTerm("");
     };
 
-    // -------------------------
-    // Pagination Berechnungen
-    // -------------------------
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentMeals = filteredMeals.slice(indexOfFirstItem, indexOfLastItem);
     const totalPages = Math.ceil(filteredMeals.length / itemsPerPage);
 
-    // -------------------------
-    // Favoritenverwaltung
-    // -------------------------
-    const toggleFavorite = (mealId) => {
-        setFavorites((prev) => (prev.includes(mealId) ? prev.filter((id) => id !== mealId) : [...prev, mealId]));
-    };
-
     return (
         <div>
-            {/* Kategorie-Auswahl */}
             <CategoryButton
                 categories={categories}
                 activeCategory={selectedCategory}
@@ -83,23 +52,20 @@ function Home() {
             />
 
             <div className="container mt-4">
-                {/* Banner-Komponente */}
                 <Banner />
 
-                {/* Mahlzeitenkarten */}
                 <div className="row g-4">
                     {currentMeals.map((meal) => (
                         <div key={meal.id} className="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
                             <MealCard
                                 meal={meal}
-                                isFavorite={favorites.includes(meal.id)}
-                                toggleFavorite={toggleFavorite}
+                                isFavorite={favorites.some((m) => m.id === meal.id)} // проверка по контексту
+                                toggleFavorite={() => toggleFavorite(meal)} // передаем весь meal
                             />
                         </div>
                     ))}
                 </div>
 
-                {/* Pagination */}
                 <Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}
