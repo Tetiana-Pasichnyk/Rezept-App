@@ -2,12 +2,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./Login.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
+
+  const { setIsLoggedIn } = useContext(AuthContext);
 
   const handleLogin = async () => {
     try {
@@ -16,6 +19,8 @@ function Login() {
         headers: { "Content-Type": "application/json" },
         // -> <input value={email} />
         body: JSON.stringify({ email, password }),
+
+        credentials: "include", // send cookies with request
       });
 
       // http status
@@ -25,13 +30,17 @@ function Login() {
 
       const data = await res.json();
 
-      // echo json_encode(["success" => false, "message" => "Email or password incorrect"]);
+      // echo json_encode(["success" => false, "message" => "Email or password is incorrect or missing."]);
       setMsg(data.message); // show the message from login.php,
 
       if (data.success) {
-        alert("You have logged in！");
-        localStorage.setItem("loggedIn", "true");
-        window.location.href = "http://localhost:3000/";
+        alert("You have logged in!");
+        //nomore needed
+
+        setIsLoggedIn(true);
+
+        // localStorage.setItem("loggedIn", "true");
+        window.location.href = "/";
       }
     } catch (err) {
       console.error("Fetch request failed:", err);
@@ -46,7 +55,7 @@ function Login() {
           <div className="d-flex flex-column mt-5 login-content">
             <a
               className="d-flex flex-row text-decoration-none"
-              href="http://localhost:3000/"
+              href="/"
               style={{ color: "black" }}
             >
               <i
@@ -71,7 +80,7 @@ function Login() {
               ></input>
               <input
                 className="form-control underline-input"
-                type="text"
+                type="password"
                 placeholder="Password"
                 aria-label="Password"
                 value={password}
@@ -89,7 +98,7 @@ function Login() {
             </button>
             <a
               role="button"
-              href="http://localhost:3000/register"
+              href="/register"
               className="btn btn-outline-dark mt-2 mb-5"
             >
               REGISTER

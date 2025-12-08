@@ -15,10 +15,14 @@ export const SearchContext = createContext();
  * Stellt den aktuellen Suchbegriff und die Setter-Funktion bereit.
  */
 export const SearchProvider = ({ children }) => {
-    // -------------------------
-    // State für Suchbegriff
-    // -------------------------
-    const [searchTerm, setSearchTerm] = useState(""); // Aktueller Suchbegriff
+  // -------------------------
+  // State für Suchbegriff
+  // -------------------------
+  const [searchTerm, setSearchTerm] = useState(""); // Aktueller Suchbegriff
 
-    return <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>{children}</SearchContext.Provider>;
+  return (
+    <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>
+      {children}
+    </SearchContext.Provider>
+  );
 };

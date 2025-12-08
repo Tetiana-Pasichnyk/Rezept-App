@@ -43,15 +43,26 @@ function NavBar() {
 
   //get login status
   useEffect(() => {
-    const loggedStatus = localStorage.getItem("loggedIn") === "true";
-    setIsLoggedIn(loggedStatus);
+    // first redend with backend to check login status
+    fetch("http://localhost/rezept/check-login.php", {
+      credentials: "include", // send PHPSESSID cookie
+    })
+      .then((res) => res.json())
+      .then((data) => setIsLoggedIn(data.loggedIn))
+      .catch((err) => console.error("Failed to check login:", err));
   }, []);
 
   //remove localStorage key
   const handleLogout = () => {
-    localStorage.removeItem("loggedIn");
-    setIsLoggedIn(false);
-    window.location.href = "http://localhost:3000";
+    fetch("http://localhost/rezept/logout.php", {
+      credentials: "include",
+      // ";
+    })
+      .then(() => {
+        setIsLoggedIn(false);
+        window.location.href = "http://localhost:3000";
+      })
+      .catch((err) => console.error("Logout failed:", err));
   };
 
   return (
@@ -96,13 +107,15 @@ function NavBar() {
             <Nav className="text-center">
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link onClick={goToAddMeal}>New recipe</Nav.Link>
-              <Nav.Link href="#">Log-in</Nav.Link>
+              <Nav.Link href="/login">Log-in</Nav.Link>
+              <Nav.Link href="/register">Register</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         ) : (
           <Navbar.Collapse id="main-nav" className="justify-content-center">
             <Nav className="text-center">
               <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/">My favorites</Nav.Link>
               <Nav.Link onClick={goToAddMeal}>My recipe</Nav.Link>
               <Nav.Link onClick={goToAddMeal}>New recipe</Nav.Link>
               <Nav.Link onClick={() => handleLogout()} href="/">
