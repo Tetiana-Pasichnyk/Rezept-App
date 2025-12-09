@@ -1,70 +1,146 @@
-# Getting Started with Create React App
+# 📚 Super Recipe
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Autoren:
+Tetiana, Mangjun, Alona
+Datum: 09.12.2025
 
-## Available Scripts
+Ein einfaches Rezept-Verwaltungsprojekt.
+Ermöglicht das Erstellen, Anzeigen und Löschen von Rezepten direkt im Browser.
 
-In the project directory, you can run:
+## 🚀 Projektübersicht
 
-### `npm start`
+📝 Neues Rezept hinzufügen (inkl. Zutaten & Kategorie)
+👀 Rezeptdetails anzeigen
+🗑️ Eigene Rezepte löschen
+💾 Benutzerregistrierung & Login
+🔄 Öffentliche Rezepte durchsuchen
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛠️ Technologien
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+PHP 8 | MySQL | PDO | Sessions | JavaScript | Bootstrap 5
 
-### `npm test`
+## 📦 Installation & Start
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+git clone
+cd super-recipe
 
-### `npm run build`
+Backend starten
+php -S localhost:8888
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Frontend starten
+cd frontend
+npm install
+npm start
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🧩 Projektstruktur
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+PROJECT
+│
+├── BACKEND
+│ ├── add-meal.php
+│ ├── check-login.php
+│ ├── db.php
+│ ├── get-categories-areas.php
+│ ├── get-meal.php
+│ ├── get-meals.php
+│ ├── get-my-recipes.php
+│ ├── login.php
+│ ├── logout.php
+│ └── registration.php
+│
+├── FRONTEND
+│ ├── public/
+│ │ └── Image/
+│ │
+│ ├── src/
+│ │
+│ ├── components/
+│ │ ├── Banner/
+│ │ │ ├── Banner.js
+│ │ │ └── Banner.css
+│ │ ├── CategoryButton/
+│ │ │ ├── CategoryButton.js
+│ │ │ └── CategoryButton.css
+│ │ ├── Footer/
+│ │ │ ├── Footer.js
+│ │ │ └── Footer.css
+│ │ ├── MealCard/
+│ │ │ ├── MealCard.js
+│ │ │ └── MealCard.css
+│ │ ├── Nav/
+│ │ │ ├── Nav.js
+│ │ │ └── Nav.css
+│ │ ├── Pagination/
+│ │ │ ├── Pagination.js
+│ │ │ └── Pagination.css
+│ │ └── TextPage/
+│ │ ├── TextPage.js
+│ │ └── TextPage.css
+│ │
+│ ├── config/
+│ │ ├── Api.js
+│ │ └── TextPagesConfig.js
+│ │
+│ ├── context/
+│ │ ├── AuthContext.js
+│ │ ├── FavoritesContext.js
+│ │ └── SearchContext.js
+│ │
+│ └── pages/
+│ ├── AddMeal/
+│ │ ├── AddMeal.js
+│ │ └── AddMeal.css
+│ ├── Login/
+│ │ ├── Login.js
+│ │ └── Login.css
+│ ├── MealPages/
+│ │ ├── MealPages.js
+│ │ └── MealPages.css
+│ ├── Register/
+│ │ ├── Register.js
+│ │ └── Register.css
+│ ├── Datenschutz/
+│ │ ├── Datenschutz.js
+│ │ └── Datenschutz.css
+│ ├── FavoritesPage/
+│ │ ├── FavoritesPage.js
+│ │ └── FavoritesPage.css
+│ ├── Home/
+│ │ ├── Home.js
+│ │ └── Home.css
+│ ├── Impressum/
+│ │ ├── Impressum.js
+│ │ └── Impressum.css
+│ └── MyRecipesPage/
+│ ├── MyRecipesPage.js
+│ └── MyRecipesPage.css
+│
+├── App.js
+├── index.js
+├── index.css
+├── reportWebVitals.js
+├── package.json
+├── package-lock.json
+├── .gitignore
+└── README.md
 
-### `npm run eject`
+## ⚡ Hauptfunktionen
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+addMeal()
+Neues Rezept hinzufügen
+getMeals()
+Öffentliche Rezepte laden
+getUserMeals()
+Eigene Rezepte laden
+getMealDetail()
+Details eines Rezepts anzeigen
+deleteMeal()
+Eigenes Rezept löschen
+registerUser()
+Benutzer registrieren
+loginUser()
+Benutzer einloggen
+logoutUser()
+Benutzer ausloggen
+Bootstrap 5
+Styling & responsive Layout
