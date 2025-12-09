@@ -1,7 +1,6 @@
 import React from "react";
-import TextPage from "../TextPage/TextPage";
-import { datenschutzContent } from "../../config/TextPagesConfig";
-
+import TextPage from "../components/TextPage/TextPage";
+import { datenschutzContent } from "../config/TextPagesConfig";
 /**
  * Datenschutzerklärung-Komponente
  * --------------------------------------------------------------

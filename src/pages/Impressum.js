@@ -1,6 +1,6 @@
 import React from "react";
-import TextPage from "../TextPage/TextPage";
-import { impressumContent } from "../../config/TextPagesConfig";
+import TextPage from "../components/TextPage/TextPage";
+import { impressumContent } from "../config/TextPagesConfig";
 
 /**
  * Impressum-Komponente
@@ -19,12 +19,12 @@ import { impressumContent } from "../../config/TextPagesConfig";
  * --------------------------------------------------------------
  */
 function Impressum() {
-  return (
-    <TextPage 
-      title={impressumContent.title}        // Titel der Seite
-      sections={impressumContent.sections} // Array von Abschnitten mit Überschrift & Text
-    />
-  );
+    return (
+        <TextPage
+            title={impressumContent.title} // Titel der Seite
+            sections={impressumContent.sections} // Array von Abschnitten mit Überschrift & Text
+        />
+    );
 }
 
 export default Impressum;

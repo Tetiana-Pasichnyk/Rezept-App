@@ -9,8 +9,8 @@ import { SearchProvider } from "./context/SearchContext";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Footer from "./components/Footer/Footer";
-import Impressum from "./components/Footer/Impressum";
-import Datenshutz from "./components/Footer/Datenshutz";
+import Impressum from "./pages/Impressum";
+import Datensсhutz from "./pages/Datensсhutz";
 import { AuthProvider } from "./context/AuthContext";
 import { FavoritesProvider } from "./context/FavoritesContext";
 import FavoritesPage from "./pages/FavoritesPage";
@@ -53,7 +53,7 @@ function App() {
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/impressum" element={<Impressum />} />
-                        <Route path="/data-protection" element={<Datenshutz />} />
+                        <Route path="/data-protection" element={<Datensсhutz />} />
                     </Routes>
 
                     {/* Footer nur anzeigen, wenn nicht auf Login/Register-Seite */}
