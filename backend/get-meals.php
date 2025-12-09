@@ -9,25 +9,7 @@ header("Access-Control-Allow-Origin: *");
 // ============================================
 // DATENBANKVERBINDUNG
 // ============================================
-try {
-    $pdo = new PDO(
-        "mysql:host=localhost;port=8889;dbname=rezept_db;charset=utf8",
-        "root",
-        "root",
-        [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,        // Exception-Modus für Fehler
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,  // Standard Fetch-Modus: assoziatives Array
-            PDO::ATTR_EMULATE_PREPARES => false,               // Native Prepared Statements
-        ]
-    );
-} catch (PDOException $e) {
-    // Fehler bei DB-Verbindung
-    echo json_encode([
-        "status" => "error",
-        "message" => "Datenbankverbindung fehlgeschlagen: " . $e->getMessage()
-    ]);
-    exit;
-}
+require_once "db.php";
 
 // ============================================
 // OPTIONALEN KATEGORIENFILTER AUSLESEN
