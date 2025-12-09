@@ -5,7 +5,7 @@ import MealCard from "../components/MealCard/MealCard";
 import Pagination from "../components/Pagination/Pagination";
 import CategoryButton from "../components/CategoryButton/CategoryButton";
 import Banner from "../components/Banner/Banner";
-
+import { API_BASE_URL } from "../config/Api";
 // ------------------------------
 // Home-Komponente
 // Anzeige der Startseite mit Banner, Kategorien, Mahlzeiten und Pagination
@@ -32,8 +32,8 @@ function Home() {
     // ------------------------------
     useEffect(() => {
         const url = selectedCategory
-            ? `http://localhost:8888/rezept-plattform/backend/get-meals.php?category=${selectedCategory}`
-            : "http://localhost:8888/rezept-plattform/backend/get-meals.php";
+            ? `${API_BASE_URL}/get-meals.php?category=${selectedCategory}`
+            : `${API_BASE_URL}/get-meals.php`;
 
         fetch(url)
             .then((res) => res.json())

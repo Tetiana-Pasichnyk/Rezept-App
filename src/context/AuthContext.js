@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { API_BASE_URL } from "../config/Api";
 
 // ---------------------------
 // AuthContext
@@ -16,7 +17,7 @@ export function AuthProvider({ children }) {
 
     // useEffect: Prüft beim initialen Laden, ob der Nutzer bereits eingeloggt ist
     useEffect(() => {
-        fetch("http://localhost:8888/rezept-plattform/backend/check-login.php", {
+        fetch(`${API_BASE_URL}/check-login.php`, {
             credentials: "include", // Sorgt dafür, dass Cookies (Session) mitgesendet werden
         })
             .then((res) => res.json()) // Antwort als JSON parsen

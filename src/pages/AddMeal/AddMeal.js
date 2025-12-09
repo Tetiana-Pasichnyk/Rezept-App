@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Navigation / Redirect
 import { Container, Row, Col, Form, Button, Image, Modal } from "react-bootstrap";
 import { HiX } from "react-icons/hi";
-
+import { API_BASE_URL } from "../../config/Api";
 import "./AddMeal.css";
 
 // ------------------------------
@@ -43,7 +43,7 @@ function AddMealPage() {
     // Kategorien und Länder beim Mounten laden
     // ------------------------------
     useEffect(() => {
-        fetch("http://localhost:8888/rezept-plattform/backend/get-categories-areas.php")
+        fetch(`${API_BASE_URL}/get-categories-areas.php`)
             .then((res) => res.json())
             .then((data) => {
                 setCategories(data.categories || []);
@@ -134,7 +134,7 @@ function AddMealPage() {
         formData.append("ingredients", JSON.stringify(ingredients.filter((i) => i.ingredient.trim() !== "")));
 
         try {
-            const res = await fetch("http://localhost:8888/rezept-plattform/backend/add-meal.php", {
+            const res = await fetch(`${API_BASE_URL}/add-meal.php`, {
                 method: "POST",
                 body: formData,
                 credentials: "include",

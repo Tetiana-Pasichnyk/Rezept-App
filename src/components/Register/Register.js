@@ -3,6 +3,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "../Register/Register.css";
 import { useState } from "react";
+import { API_BASE_URL } from "../../config/Api";
 
 function Register() {
     // -------------------------------
@@ -68,7 +69,7 @@ function Register() {
 
         // --- Backend Request ---
         try {
-            const res = await fetch("http://localhost:8888/rezept-plattform/backend/registration.php", {
+            const res = await fetch(`${API_BASE_URL}/registration.php`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(form),

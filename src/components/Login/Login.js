@@ -4,6 +4,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./Login.css";
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { API_BASE_URL } from "../../config/Api";
 
 /**
  * Login-Komponente
@@ -36,7 +37,7 @@ function Login() {
     // --------------------------------------------
     const handleLogin = async () => {
         try {
-            const res = await fetch("http://localhost:8888/rezept-plattform/backend/login.php", {
+            const res = await fetch(`${API_BASE_URL}/login.php`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password }),

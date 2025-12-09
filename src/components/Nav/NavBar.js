@@ -5,6 +5,7 @@ import { Navbar, Nav, Container, Form } from "react-bootstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./NavBar.css";
 import { useState } from "react";
+import { API_BASE_URL } from "../../config/Api";
 
 /**
  * NavBar-Komponente
@@ -53,7 +54,7 @@ function NavBar() {
     // Backend-Abfrage für Login-Status beim Initial-Render
     // -------------------------
     useEffect(() => {
-        fetch("http://localhost:8888/rezept-plattform/backend/check-login.php", {
+        fetch(`${API_BASE_URL}/check-login.php`, {
             credentials: "include", // send PHPSESSID cookie
         })
             .then((res) => res.json())
@@ -66,7 +67,7 @@ function NavBar() {
     // Backend-Aufruf und Redirect auf Startseite
     // -------------------------
     const handleLogout = () => {
-        fetch("http://localhost:8888/rezept-plattform/backend/logout.php", {
+        fetch(`${API_BASE_URL}/logout.php`, {
             credentials: "include",
         })
             .then(() => {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import "./MealPage.css";
+import { API_BASE_URL } from "../../config/Api";
 
 /**
  * MealPage-Komponente
@@ -32,7 +33,7 @@ function MealPage() {
      * ------------------------------------------------------------
      */
     useEffect(() => {
-        fetch(`http://localhost:8888/rezept-plattform/backend/get-meal.php?id=${id}`)
+        fetch(`${API_BASE_URL}/get-meal.php?id=${id}`)
             .then((res) => res.json())
             .then((data) => setMeal(data));
     }, [id]);
