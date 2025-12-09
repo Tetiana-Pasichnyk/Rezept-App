@@ -1,7 +1,8 @@
- import { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { Navbar, Nav, Container, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./NavBar.css";
 import { useState } from "react";
@@ -72,7 +73,7 @@ function NavBar() {
         })
             .then(() => {
                 setIsLoggedIn(false);
-                window.location.href = "http://localhost:3000";
+                navigate("/");
             })
             .catch((err) => console.error("Logout failed:", err));
     };
@@ -84,7 +85,9 @@ function NavBar() {
                     Logo und Branding
                     ------------------------------ */}
                 <Navbar.Brand className="navbar-logo fw-bold">
-                    <i className="bi bi-book" /> Great Recipe
+                    <Link to="/" className="text-decoration-none text-dark d-flex align-items-center nav-link">
+                        <i className="bi bi-book" /> Super Recipe
+                    </Link>
                 </Navbar.Brand>
 
                 {/* ------------------------------
@@ -125,22 +128,38 @@ function NavBar() {
                     ------------------------------ */}
                 {!isLoggedIn ? (
                     <Navbar.Collapse id="main-nav" className="justify-content-center">
-                        <Nav className="text-center">
-                            <Nav.Link href="/">Home</Nav.Link>
-                            <Nav.Link href="/favorites">My favorites</Nav.Link>
-                            <Nav.Link href="/login">Log-in</Nav.Link>
-                            <Nav.Link href="/register">Register</Nav.Link>
+                        <Nav className="text-center ms-auto">
+                            <Nav.Link className="nav-link" href="/">
+                                <i className="bi bi-house" /> Home
+                            </Nav.Link>
+                            <Nav.Link className="nav-link" href="/favorites">
+                                <i className="bi bi-heart" /> My favorites
+                            </Nav.Link>
+                            <Nav.Link className="nav-link" href="/login">
+                                <i className="bi bi-box-arrow-in-right" /> Log-in
+                            </Nav.Link>
+                            <Nav.Link className="nav-link" href="/register">
+                                <i className="bi bi-person-plus" /> Register
+                            </Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 ) : (
                     <Navbar.Collapse id="main-nav" className="justify-content-center">
-                        <Nav className="text-center">
-                            <Nav.Link href="/">Home</Nav.Link>
-                            <Nav.Link href="/favorites">My favorites</Nav.Link>
-                            <Nav.Link href="/my-recipes">My Recipes</Nav.Link>
-                            <Nav.Link onClick={goToAddMeal}>New recipe</Nav.Link>
-                            <Nav.Link onClick={() => handleLogout()} href="/">
-                                Log-out
+                        <Nav className="text-center ms-auto">
+                            <Nav.Link className="nav-link" href="/">
+                                <i className="bi bi-house" /> Home
+                            </Nav.Link>
+                            <Nav.Link className="nav-link" href="/favorites">
+                                <i className="bi bi-heart" /> My favorites
+                            </Nav.Link>
+                            <Nav.Link className="nav-link" href="/my-recipes">
+                                <i className="bi bi-journal-text" /> My Recipes
+                            </Nav.Link>
+                            <Nav.Link className="nav-link" onClick={goToAddMeal}>
+                                <i className="bi bi-plus-square" /> New recipe
+                            </Nav.Link>
+                            <Nav.Link className="nav-link" onClick={() => handleLogout()} href="/">
+                                <i className="bi bi-box-arrow-right" /> Log-out
                             </Nav.Link>
                         </Nav>
                     </Navbar.Collapse>

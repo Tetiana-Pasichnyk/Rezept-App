@@ -152,7 +152,7 @@ function AddMealPage() {
             clearForm();
 
             // Redirect zur MyRecipes-Seite
-            navigate("/my-recipes");
+          
         } catch (err) {
             console.error("Fehler beim Senden des Formulars:", err);
             setShowErrorModal(true);
@@ -204,7 +204,10 @@ function AddMealPage() {
                 <Modal.Footer>
                     <Button
                         variant="success"
-                        onClick={() => setShowSuccessModal(false)}
+                        onClick={() => {
+                            setShowSuccessModal(false);
+                            navigate("/my-recipes");
+                        }}
                         style={{ borderRadius: "40px", padding: "0.5rem 1.4rem" }}
                     >
                         OK

@@ -5,35 +5,39 @@ import "./Login.css";
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { API_BASE_URL } from "../../config/Api";
+import { Modal, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Login-Komponente
  * --------------------------------------------------------------
- * Anzeige des Login-Formulars für Benutzer.
+ * Darstellung des Login-Formulars für Benutzer.
  *
  * Features:
- * - Email- und Passwort-Eingabe
- * - Login via fetch an das Backend (PHP)
- * - Fehlermeldungen werden direkt unter dem Formular angezeigt
+ * - Eingabe von Email und Passwort
+ * - Login über fetch an das Backend (PHP)
+ * - Anzeige von Fehlermeldungen direkt unter dem Formular
  * - Buttons für Registrierung und alternative Logins (Google, Apple)
  *
  * Accessibility:
  * - aria-labels für Input-Felder
- * - semantische Buttons und Links
+ * - Semantische Buttons und Links
  * --------------------------------------------------------------
  */
 function Login() {
+    const navigate = useNavigate(); // Funktion für programmatische Navigation / Redirect
+
     // --------------------------------------------
     // State-Management
     // --------------------------------------------
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [msg, setMsg] = useState("");
-
-    const { setIsLoggedIn } = useContext(AuthContext);
+    const [email, setEmail] = useState(""); // Eingabe Email
+    const [password, setPassword] = useState(""); // Eingabe Passwort
+    const [msg, setMsg] = useState(""); // Anzeige Backend-Nachricht
+    const { setIsLoggedIn } = useContext(AuthContext); // Auth-Status
+    const [showLoginAlert, setShowLoginAlert] = useState(false); // Modal anzeigen
 
     // --------------------------------------------
-    // Login Handler
+    // Login-Handler
     // --------------------------------------------
     const handleLogin = async () => {
         try {
@@ -44,20 +48,18 @@ function Login() {
                 credentials: "include", // Cookies werden mitgesendet
             });
 
-            // HTTP-Status prüfen
             if (!res.ok) {
                 throw new Error(`HTTP Fehler: ${res.status}`);
             }
 
             const data = await res.json();
 
-            // Nachricht vom Backend anzeigen
+            // Backend-Nachricht anzeigen
             setMsg(data.message);
 
             if (data.success) {
-                alert("You have logged in!");
-                setIsLoggedIn(true);
-                window.location.href = "/";
+                setIsLoggedIn(true); // Auth-Status setzen
+                setShowLoginAlert(true); // Erfolgreiches Login-Modal anzeigen
             }
         } catch (err) {
             console.error("Fetch request failed:", err);
@@ -79,7 +81,7 @@ function Login() {
                             <h1 className="text-nowrap">&nbsp; Super Recipe </h1>
                         </a>
 
-                        {/* Fehlermeldung */}
+                        {/* Backend-Fehlermeldung */}
                         <p style={{ color: "red" }}>{msg}</p>
 
                         <h2>Login</h2>
@@ -104,7 +106,7 @@ function Login() {
                             />
                         </form>
 
-                        {/* Passwort vergessen */}
+                        {/* Passwort vergessen Link */}
                         <h6 className="text-nowrap mt-1">Forget your password?</h6>
 
                         {/* Login Button */}
@@ -132,11 +134,41 @@ function Login() {
             </div>
 
             {/* -----------------------
-                Rechte Spalte: Bild / Dekoration
+                Rechte Spalte: Dekoration / Bild
                ----------------------- */}
             <div className="col-6 right-pic">
                 <img src="images/spices-klein.png" alt="spices" className="img-fluid" />
             </div>
+
+            {/* -----------------------
+                Modal für erfolgreiches Login
+               ----------------------- */}
+            <Modal
+                show={showLoginAlert}
+                onHide={() => setShowLoginAlert(false)}
+                centered
+                className="login-success-modal"
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        <span>✅</span> {/* Erfolgssymbol */}
+                        Logged In
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>You have successfully logged in!</Modal.Body>
+                <Modal.Footer>
+                    {/* OK Button rechts ausgerichtet */}
+                    <Button
+                        className="ms-auto"
+                        onClick={() => {
+                            setShowLoginAlert(false);
+                            navigate("/"); // React Router Redirect
+                        }}
+                    >
+                        OK
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }

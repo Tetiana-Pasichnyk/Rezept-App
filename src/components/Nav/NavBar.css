@@ -6,7 +6,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     position: relative;
 }
 
@@ -14,6 +13,11 @@
 .navbar-logo {
     font-size: 1rem;
     text-align: center;
+}
+
+/* Abstand zwischen Icon und Text im Logo */
+.navbar-logo i {
+    margin-right: 6px;
 }
 
 /* =============================================
@@ -25,11 +29,56 @@
     margin: 0 10px;
 }
 
+/* Horizontale Linie / optische Trennung */
 .opacity-50 {
     background-color: #d2691e;
     height: 1px;
     border: none;
 }
+
+/* =============================================
+   NAV-LINKS – Standard und Hover-Effekt
+   ============================================= */
+.nav-link {
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: #d2691e !important; /* Hover-Farbe */
+}
+
+/* =============================================
+   NAV-LINKS – Vertikale Trennlinie auf großen Bildschirmen
+   ============================================= */
+@media (min-width: 768px) {
+    .nav-link {
+        position: relative;
+        padding-right: 12px;
+        margin-right: 12px;
+    }
+
+    .nav-link:not(:last-child)::after {
+        content: "|"; /* Trennzeichen */
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: bold;
+    }
+}
+
+/* Mobile Ansicht – Trennlinie entfernen */
+@media (max-width: 767px) {
+    .nav-link::after {
+        content: none;
+    }
+
+    .nav-link {
+        padding-right: 6px; /* kleinere Abstände auf mobilen Geräten */
+        margin-right: 6px;
+    }
+}
+
 /* =============================================
    RESPONSIVE – Tablets und kleinere Displays
    ============================================= */
@@ -70,6 +119,7 @@
         height: 28px;
         font-size: 0.65rem;
     }
+
     .small-placeholder::placeholder {
         font-size: 10px;
     }

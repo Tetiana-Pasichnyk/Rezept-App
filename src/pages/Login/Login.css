@@ -5,8 +5,8 @@
    ============================================= */
 .content-box {
   height: 90vh;
-  margin: 0 auto;             /* zentriert horizontal */
-  border: 1px solid black;    /* Rahmen für visuelles Debugging */
+  margin: 0 auto;             /* horizontal zentriert */
+  border: 1px solid black;    /* Rahmen für Debugging */
   zoom: 0.9;                  /* globale Skalierung */
 }
 
@@ -29,7 +29,7 @@
 /* =============================================
    Bild rechts im Layout
    ---------------------------------------------
-   Höhe auf 100vh, Bild skaliert das Container-Verhältnis
+   Höhe auf 100vh, Bild skaliert Container-Verhältnis
    ============================================= */
 .right-pic {
   height: 100vh;
@@ -65,7 +65,7 @@
    Buttons
    -------------------------------------------- */
 .login-button {
-  background-color: #d2691e;
+  background-color: #d2691e; /* Hauptfarbe Login-Button */
 }
 
 .login-button:hover {
@@ -73,12 +73,65 @@
 }
 
 .register-button {
-  margin-top: 2px;
+  margin-top: 2px; /* kleiner Abstand */
 }
 
 /* Google Icon */
 .google-icon {
-  color: #d2691e;
+  color: #d2691e; /* Farbe für Google-Icon */
+}
+
+/* =============================================
+   Login Success Modal
+   ---------------------------------------------
+   Gleiche Stile wie in AddMealPage für Konsistenz
+   ============================================= */
+.login-success-modal .modal-content {
+  border-radius: 20px; /* abgerundete Ecken */
+  overflow: hidden;
+}
+
+.login-success-modal .modal-header {
+  background-color: #d4edda; /* grüner Header */
+  border-bottom: none; /* kein Trennstrich */
+}
+
+.login-success-modal .modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #000;
+  display: flex;
+  align-items: center;
+}
+
+.login-success-modal .modal-title span {
+  font-size: 1.5rem;
+  margin-right: 0.5rem; /* Abstand zwischen Symbol und Text */
+}
+
+.login-success-modal .modal-body {
+  color: #155724; /* grüner Text */
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.login-success-modal .modal-footer {
+  border-top: none; /* kein Trennstrich */
+  justify-content: flex-end; /* Button rechts */
+}
+
+.login-success-modal .modal-footer .btn {
+  border-radius: 40px;
+  padding: 0.5rem 1.4rem;
+  background-color: #e09b6b; /* Hauptfarbe Button */
+  border: none;
+  color: #fff;
+  font-weight: 500;
+}
+
+.login-success-modal .modal-footer .btn:hover {
+  background-color: #d2691e; /* Hover-Farbe */
+  color: #fff;
 }
 
 /* =============================================
@@ -97,20 +150,20 @@
     display: none;
   }
 
-  /* Volle Breite für die Spalte */
+  /* Volle Breite für Spalte */
   .col-6 {
     flex: 0 0 100%;
     max-width: 100%;
   }
 
   .login-content {
-    padding: 2px; /* kleine Abstände auf kleineren Bildschirmen */
+    padding: 2px; /* kleinere Abstände bei kleinen Bildschirmen */
   }
 
   .content-box {
     margin: 9% !important;
     padding: 2%;
-    height: 700px;
+    height: 700px; /* reduzierte Höhe */
   }
 }
 
@@ -126,5 +179,5 @@
 }
 
 .check span {
-  font-size: small; /* beschriftung der checkbox */
+  font-size: small; /* Beschriftung der Checkbox */
 }

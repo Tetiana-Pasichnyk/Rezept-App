@@ -39,7 +39,22 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* leichter „Hover/Pressed“-Effekt */
     transform: scale(1.05); /* leichte Vergrößerung */
 }
+/* =============================================
+   HOVER-EFFEKT FÜR CATEGORY-PILLS
+   - leichte Vergrößerung und Schatten beim Hover
+   ============================================= */
+.category-pill:hover {
+    transform: scale(1.05); /* leichte Vergrößerung */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* sanfter Schatten */
+    cursor: pointer; /* zeigt interaktive Elemente an */
+    transition: transform 0.2s, box-shadow 0.2s; /* weiche Animation */
+}
 
+/* Optional: aktive Kategorie bleibt größer + Schatten */
+.category-pill.active {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 /* =============================================
    MOBILE ADAPTATION (<480px)
    --------------------------------------------- */
