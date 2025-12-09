@@ -218,7 +218,7 @@
     transition: background-color 0.3s ease;
 }
 .modal-footer .btn-secondary:hover {
-    background-color: #e0c7d0;
+    background-color: #d2691e;
 }
 
 /* Animation für Modal-Einblendung */
