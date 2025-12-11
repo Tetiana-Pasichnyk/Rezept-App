@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Image } from "react-bootstrap";
+
 import "./MealPage.css";
 import { API_BASE_URL } from "../../config/Api";
 

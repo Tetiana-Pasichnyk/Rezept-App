@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import "./MealCard.css";
 
 /**
  * MealCard-Komponente
  * --------------------------------------------------------------
  * Anzeige eines einzelnen Rezepts in Kartenform mit Hover- und Click-Animationen.
- * 
+ *
  * Props:
  * - meal: Objekt mit allen Rezeptinformationen (name, thumbnail, category_name, area_name, id)
  * - isFavorite: Boolean, ob das Meal als Favorit markiert ist

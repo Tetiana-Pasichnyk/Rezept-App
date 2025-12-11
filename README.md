@@ -17,24 +17,33 @@ Ermöglicht das Erstellen, Anzeigen und Löschen von Rezepten direkt im Browser.
 
 ## 🛠️ Technologien
 
-PHP 8 | MySQL | PDO | Sessions | JavaScript | Bootstrap 5
+PHP 8 | MySQL | PDO | Sessions | JavaScript| React | Bootstrap 5
 
 ## 📦 Installation & Start
 
-git clone
-cd super-recipe
+git clone https://github.com/Tetiana-Pasichnyk/Rezept-App.git
 
-Backend starten
+# Backend starten
+
 php -S localhost:8888
 
-Frontend starten
-cd frontend
+⚠️ Hinweis:
+Standardmäßig läuft der Backend-Server auf Port 8888.
+Wenn der Port bereits belegt ist, kann ein anderer freier Port gewählt werden, z. B. 8000 oder 8080.
+Wichtig: In diesem Fall muss der Port an zwei Stellen im Projekt angepasst werden:
+backend – db.php - Hier gewählter port durch den gewählten Port ersetzen.
+
+# Frontend starten
+
 npm install
 npm start
 
+⚠️ Hinweis:
+Wenn der Backend-Port geändert wurde, muss API_BASE_URL in src/config/Api.js angepasst werden, damit die API-Aufrufe korrekt funktionieren.
+
 ## 🧩 Projektstruktur
 
-PROJECT
+SUPER-RECIPE
 │
 ├── BACKEND
 │ ├── add-meal.php
@@ -68,8 +77,8 @@ PROJECT
 │ │ │ ├── MealCard.js
 │ │ │ └── MealCard.css
 │ │ ├── Nav/
-│ │ │ ├── Nav.js
-│ │ │ └── Nav.css
+│ │ │ ├── NavBar.js
+│ │ │ └── NavBar.css
 │ │ ├── Pagination/
 │ │ │ ├── Pagination.js
 │ │ │ └── Pagination.css
@@ -144,3 +153,17 @@ logoutUser()
 Benutzer ausloggen
 Bootstrap 5
 Styling & responsive Layout
+
+## Verwendete Bibliotheken
+
+-   React Bootstrap
+-   React Router DOM
+-   @fontsource/happy-monkey
+-   Bootstrap Icons
+-   React Icons
+
+## Installation der Abhängigkeiten
+
+Um alle benötigten Abhängigkeiten zu installieren, bitte folgendes ausführen:
+
+npm install

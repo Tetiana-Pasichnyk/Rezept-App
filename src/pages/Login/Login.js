@@ -1,12 +1,10 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import "./Login.css";
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { Modal, Button } from "react-bootstrap";
+
 import { AuthContext } from "../../context/AuthContext";
 import { API_BASE_URL } from "../../config/Api";
-import { Modal, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 /**
  * Login-Komponente

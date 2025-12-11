@@ -1,19 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-
-// ------------------------------
-// Bootstrap CSS & JS importieren
-// CSS für Grundstyles, JS für interaktive Komponenten (Modal, Dropdown, etc.)
-// ------------------------------
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-
-// React Router import für Routing
 import { BrowserRouter } from "react-router-dom";
 
-// Globale CSS-Datei
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 
 // ------------------------------
@@ -27,11 +20,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 // - <BrowserRouter> für Client-Side-Routing
 // ------------------------------
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
+    <React.StrictMode>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </React.StrictMode>
 );
 
 // ------------------------------

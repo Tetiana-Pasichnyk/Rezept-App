@@ -1,11 +1,14 @@
 import { useContext, useEffect, useState } from "react";
+
 import { SearchContext } from "../context/SearchContext";
-import { FavoritesContext } from "../context/FavoritesContext"; // Globale Favoriten
+import { FavoritesContext } from "../context/FavoritesContext";
+import { API_BASE_URL } from "../config/Api"; 
+
 import MealCard from "../components/MealCard/MealCard";
 import Pagination from "../components/Pagination/Pagination";
 import CategoryButton from "../components/CategoryButton/CategoryButton";
 import Banner from "../components/Banner/Banner";
-import { API_BASE_URL } from "../config/Api";
+
 // ------------------------------
 // Home-Komponente
 // Anzeige der Startseite mit Banner, Kategorien, Mahlzeiten und Pagination

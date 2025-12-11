@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+
 import { SearchContext } from "../context/SearchContext";
 import { FavoritesContext } from "../context/FavoritesContext";
 import MealCard from "../components/MealCard/MealCard";

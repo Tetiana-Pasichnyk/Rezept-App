@@ -1,18 +1,19 @@
-import React from "react";
-import "@fontsource/happy-monkey";
 import { Routes, Route, useLocation } from "react-router-dom";
+import "@fontsource/happy-monkey";
+
+import { SearchProvider } from "./context/SearchContext";
+import { AuthProvider } from "./context/AuthContext";
+import { FavoritesProvider } from "./context/FavoritesContext";
+
 import Home from "./pages/Home";
 import MealPage from "./pages/MealPages/MealPage";
 import NavBar from "./components/Nav/NavBar";
 import AddMeal from "./pages/AddMeal/AddMeal";
-import { SearchProvider } from "./context/SearchContext";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Footer from "./components/Footer/Footer";
 import Impressum from "./pages/Impressum";
 import Datensсhutz from "./pages/Datensсhutz";
-import { AuthProvider } from "./context/AuthContext";
-import { FavoritesProvider } from "./context/FavoritesContext";
 import FavoritesPage from "./pages/FavoritesPage";
 import MyRecipesPage from "./pages/MyRecipesPage";
 

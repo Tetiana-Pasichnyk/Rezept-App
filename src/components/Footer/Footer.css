@@ -5,7 +5,7 @@
    ============================================= */
 .footer {
     font-family: "Happy Monkey", sans-serif !important; /* Spezifische Schriftart */
-    margin-left: 10%;   /* horizontale Abstände links/rechts */
+    margin-left: 10%; /* horizontale Abstände links/rechts */
     margin-right: 10%;
 }
 
@@ -16,22 +16,22 @@
 
 /* Links im Footer */
 .footer a {
-    margin-right: 3%;          /* Abstand zwischen Links */
+    margin-right: 3%; /* Abstand zwischen Links */
     border: 2px solid #d2691e; /* Rahmenfarbe Orange/Braun */
 }
 
 /* Hover-Effekt für Links */
 .footer a:hover {
-    transform: scale(1.1);            /* leichte Vergrößerung beim Hover */
+    transform: scale(1.1); /* leichte Vergrößerung beim Hover */
     background-color: #d2691e !important; /* Hintergrundfarbe beim Hover */
-    opacity: 1;                        /* volle Deckkraft */
+    opacity: 1; /* volle Deckkraft */
 }
 
 /* Bilderrahmen im Footer */
 .footer-img-frame > img {
-    width: 300px; 
-    height: 200px; 
-    overflow: hidden;   /* Bildüberlauf verbergen */
+    width: 300px;
+    height: 200px;
+    overflow: hidden; /* Bildüberlauf verbergen */
     border-radius: 8px; /* abgerundete Ecken */
 }
 
@@ -42,7 +42,7 @@
    ============================================= */
 @media (max-width: 576px) {
     .footer .row.g-5 {
-        --bs-gutter-x: 0;  /* horizontale Lücken entfernen */
-        --bs-gutter-y: 0;  /* vertikale Lücken entfernen */
+        --bs-gutter-x: 0; /* horizontale Lücken entfernen */
+        --bs-gutter-y: 0; /* vertikale Lücken entfernen */
     }
 }

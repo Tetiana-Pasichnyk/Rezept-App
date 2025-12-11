@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 
 // ------------------------------
 // FavoritesContext
@@ -45,9 +45,5 @@ export function FavoritesProvider({ children }) {
     // Context-Provider
     // value enthält sowohl die aktuelle Favoritenliste als auch die Toggle-Funktion
     // ------------------------------
-    return (
-        <FavoritesContext.Provider value={{ favorites, toggleFavorite }}>
-            {children}
-        </FavoritesContext.Provider>
-    );
+    return <FavoritesContext.Provider value={{ favorites, toggleFavorite }}>{children}</FavoritesContext.Provider>;
 }

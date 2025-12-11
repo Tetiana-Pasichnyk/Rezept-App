@@ -1,12 +1,10 @@
-import { useContext, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { SearchContext } from "../../context/SearchContext";
+import { useContext, useEffect, useState } from "react";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { Navbar, Nav, Container, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import "./NavBar.css";
-import { useState } from "react";
+
+import { SearchContext } from "../../context/SearchContext";
 import { API_BASE_URL } from "../../config/Api";
+import "./NavBar.css";
 
 /**
  * NavBar-Komponente
@@ -39,12 +37,6 @@ function NavBar() {
     useEffect(() => {
         setSearchTerm("");
     }, [location.pathname, setSearchTerm]);
-
-    // -------------------------
-    // Funktion zum Reset beim Kategoriewechsel
-    // Kann an CategoryButton-Komponente weitergegeben werden
-    // -------------------------
-    const resetSearch = () => setSearchTerm("");
 
     // -------------------------
     // Lokaler State für Login-Status

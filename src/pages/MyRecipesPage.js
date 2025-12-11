@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+
 import { SearchContext } from "../context/SearchContext";
 import MealCard from "../components/MealCard/MealCard";
 import Pagination from "../components/Pagination/Pagination";

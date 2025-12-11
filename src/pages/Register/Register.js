@@ -1,12 +1,9 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import "./Register.css";
 import { useState } from "react";
-import { API_BASE_URL } from "../../config/Api";
 import { Modal, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
+import { API_BASE_URL } from "../../config/Api";
+import "./Register.css";
 /**
  * Register-Komponente
  * --------------------------------------------------------------

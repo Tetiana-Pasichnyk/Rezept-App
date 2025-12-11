@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // Navigation / Redirect
+import { useNavigate } from "react-router-dom"; 
 import { Container, Row, Col, Form, Button, Image, Modal } from "react-bootstrap";
 import { HiX } from "react-icons/hi";
+
 import { API_BASE_URL } from "../../config/Api";
 import "./AddMeal.css";
 
@@ -167,7 +168,7 @@ function AddMealPage() {
             setHighlight(pendingValidation);
             setPendingValidation(null);
         }
-    }, [showErrorModal]);
+    }, [showErrorModal, pendingValidation]);
 
     // ------------------------------
     // JSX / Render

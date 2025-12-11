@@ -1,4 +1,3 @@
-import React from "react";
 import TextPage from "../components/TextPage/TextPage";
 import { impressumContent } from "../config/TextPagesConfig";
 
